@@ -3,13 +3,13 @@
 
 extern int DIM;
 
-void read_data(float mass[], float position[][DIM], float velocity[][DIM], int N, char file_name[])
+void read_data(float mass[], float position[][DIM], float velocity[][DIM], int N, char *file_name)
 {
     int i, k;
 
     FILE *fp;
 
-	fp = fopen(file_name, "r");
+	fp = fopen("./data000.txt", "r");
     if(fp == NULL)
         exit(-1);
 

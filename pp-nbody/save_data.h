@@ -14,10 +14,8 @@ void save_data(float mass[], float position[][DIM], float velocity[][DIM], int N
 	char s_number[4];
 	sprintf(s_number, "%d", file_num);  //convert file_num to string
 
-    char filename[15];
-    strcpy(filename,  "./data/data");
-    strcat(filename, s_number);
-    strcat(filename, ".txt");
+    char filename[40];
+    snprintf(filename, sizeof(filename), "./data/data%04d.txt", file_num);
 
 	FILE *fp; //File to write positions to
 	fp = fopen(filename, "w");

@@ -89,7 +89,7 @@ void inity(double *y, const int N) {
     }
 }
 
-int main(int argc, const char * argv[]) {
+int main2(int argc, const char * argv[]) {
 
     assert(argc >= 2);
     // int N = pow(2, strtol(argv[1], NULL, 10));
