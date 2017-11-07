@@ -6,7 +6,8 @@
 
 const int DIM = 3;  //number of dimensions
 
-int main()
+int main1() // have to change this to main1() because one folder allows
+            // only one main().
 {
     //three bodies in elliptical orbits
     int N = 3;

@@ -71,9 +71,9 @@ int main(int argc, char *argv[])
 
         if( strcmp(integrator,"RK4") == 0 )
             integ_RK4(mass, position, velocity, force, N, t_step, epsilon);
-	   else if ( strcmp(integrator, "LF2") == 0 )
+       else if ( strcmp(integrator, "LF2") == 0 )
             integ_LF2(mass, position, velocity, force, N, t_step);
-	   else
+       else
             return -1;
 
         if(i % op_freq == 0)

@@ -68,8 +68,8 @@ if __name__ == "__main__":
 
     mlab.figure(size=[1600, 1200], bgcolor=(0, 0, 0))
 
-    make_plot(_data)
+    # make_plot(_data)
 
     # The following code make a sequence of figures to make a video
-    # for i in range(120):
-    #     make_plot(_data, figid=i, azimuth=i/3.0)
+    for i in range(120):
+        make_plot(_data, figid=i, azimuth=i/3.0)

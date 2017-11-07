@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5AD5A04B1FB256F0006B166D /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AD5A04A1FB256F0006B166D /* main.c */; };
-		5AD5A0651FB25F55006B166D /* gen_data.c in Sources */ = {isa = PBXBuildFile; fileRef = 5AD5A0641FB25F55006B166D /* gen_data.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,7 +30,6 @@
 		5AD5A04E1FB25A33006B166D /* read_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = read_data.h; sourceTree = SOURCE_ROOT; };
 		5AD5A04F1FB25A33006B166D /* calc_force.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = calc_force.h; sourceTree = SOURCE_ROOT; };
 		5AD5A0501FB25A33006B166D /* save_data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = save_data.h; sourceTree = SOURCE_ROOT; };
-		5AD5A0641FB25F55006B166D /* gen_data.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gen_data.c; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +62,6 @@
 		5AD5A0421FB256CF006B166D /* pp-nbody */ = {
 			isa = PBXGroup;
 			children = (
-				5AD5A0641FB25F55006B166D /* gen_data.c */,
 				5AD5A04A1FB256F0006B166D /* main.c */,
 				5AD5A04F1FB25A33006B166D /* calc_force.h */,
 				5AD5A04D1FB25A33006B166D /* integ_LF2.h */,
@@ -132,7 +129,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5AD5A0651FB25F55006B166D /* gen_data.c in Sources */,
 				5AD5A04B1FB256F0006B166D /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
