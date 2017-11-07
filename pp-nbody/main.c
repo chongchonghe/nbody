@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     int N = 3;   //number of particles
     float epsilon = 0.0;  //softening parameter
     float t_step = 0.01;  //time step
-    int n_steps = 10000;   // number of steps
+    int n_steps = 3000;   // number of steps
     int op_freq = 100;    // output frequency
     char *integrator = "LF2";  //ODE integration method
     char *file_name = "data000.txt";   //name of initial conditions file

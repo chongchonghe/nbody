@@ -1,5 +1,7 @@
 from __future__ import division, print_function
 import sys
+import os
+import glob
 from mayavi import mlab
 import numpy as np
 
@@ -22,16 +24,15 @@ def RandomParticle(N):
     np.savetxt('data/data.txt', data)
     # return data
 
-def read_info(fname):
-    data = np.loadtxt(fname)
-    data = np.transpose(data)[:4, :]
-    return data
 
-def make_plot(data, figid=None, azimuth=0, elevation=75):
+def single_plot(dataPath, azimuth=0, elevation=75):
     """ Input data as [m, x, y, z] """
 
     # transform data into [x, y, z, m]
+    data = np.loadtxt(dataPath)
+    data = np.transpose(data)[:4, :]
     data = data[(1, 2, 3, 0), :]
+
     mlab.clf()
     mlab.points3d(*data, color=(1, 1, 1), resolution=4, # colormap='viridis',
                   scale_factor=0.08)
@@ -49,13 +50,26 @@ def make_plot(data, figid=None, azimuth=0, elevation=75):
     camera.zoom(1)
 
     # save the figure
-    if figid is None:
-        fname = "demo_mayavi.jpg"
-    else:
-        fname = "mayavi_figs/demo_mayavi_{:05d}.jpg".format(figid)
-    mlab.savefig(fname, magnification=True, quality=100, progressive=True)
-    print(fname, "saved")
+    path1, path0 = os.path.split(os.path.abspath(dataPath))
+    figDir = path1 + '_fig'
+    if not os.path.isdir(figDir):
+        os.system("mkdir {}".format(figDir))
+    fName = os.path.join(figDir, path0[:-4] + '.jpg')
+    mlab.savefig(fName, magnification=True, quality=100, progressive=True)
+    print(fName, "saved")
 
+def main(dataPath):
+
+    if os.path.isfile(dataPath):
+        single_plot(dataPath)
+    elif os.path.isdir(dataPath):
+        for fn in glob.glob(dataPath + "/*"):
+            single_plot(fn)
+        movieDir, dataBasePath = os.path.split(dataPath)
+        movieDir += "/movie"
+        if not os.path.isdir(movieDir):
+            os.system("mkdir {}".format(movieDir))
+        os.system("ffmpeg -i {}_fig/data_%04d.jpg -pix_fmt yuv420p {}/{}.mp4".format(dataPath, movieDir, dataBasePath))
 
 if __name__ == "__main__":
 
@@ -63,13 +77,13 @@ if __name__ == "__main__":
 
     if len(sys.argv) != 2:
         raise SystemExit("usage: python visual.py path/to/data")
-
-    _data = read_info(sys.argv[1])
+    dPath = sys.argv[1]
 
     mlab.figure(size=[1600, 1200], bgcolor=(0, 0, 0))
 
-    # make_plot(_data)
+    main(dPath)
 
-    # The following code make a sequence of figures to make a video
-    for i in range(120):
-        make_plot(_data, figid=i, azimuth=i/3.0)
+    # elif os.path.isdir(dPath):
+    #     for fn in glob.glob(dPath):
+    #         _data = raed_info(dPath)
+    #         make_plot(_data, figid=i, azimuth=i/3.0)
