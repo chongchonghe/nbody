@@ -1,0 +1,70 @@
+#ifndef integ_RK4_h
+#define integ_RK4_h
+
+extern int DIM;  //number of dimensions
+
+void integ_RK4(float mass[], float position[][DIM], float velocity[][DIM], float force[][DIM], int N, float step, float epsilon)
+{
+    //update position and velocity using leapfrog
+    float kint;
+    int i, k; //loop vars
+
+    float k1_pos[N][DIM], k2_pos[N][DIM], k3_pos[N][DIM], k4_pos[N][DIM];
+    float k1_vel[N][DIM], k2_vel[N][DIM], k3_vel[N][DIM], k4_vel[N][DIM];
+    float position2[N][DIM], position3[N][DIM], position4[N][DIM];
+    float velocity2[N][DIM], velocity3[N][DIM], velocity4[N][DIM];
+    float force2[N][DIM], force3[N][DIM], force4[N][DIM];
+
+    for(i = 0; i < N; i++)
+    {
+        for(k = 0; k < DIM; k++)
+        {
+            k1_pos[i][k] = step * velocity[i][k];
+            k1_vel[i][k] = step * force[i][k] / mass[i];
+
+            position2[i][k] = position[i][k] + k1_pos[i][k] / 2;
+            velocity2[i][k] = velocity[i][k] + k1_vel[i][k] / 2;
+        }
+    }
+
+    calc_force(mass, position2, force2, N, epsilon);
+    for(i = 0; i < N; i++)
+    {
+        for(k = 0; k < DIM; k++)
+        {
+            k2_pos[i][k] = step * velocity2[i][k];
+            k2_vel[i][k] = step * force2[i][k] / mass[i];
+
+            position3[i][k] = position[i][k] + k2_pos[i][k] / 2;
+            velocity3[i][k] = velocity[i][k] + k2_vel[i][k] / 2;
+        }
+    }
+
+    calc_force(mass, position3, force3, N, epsilon);
+    for(i = 0; i < N; i++)
+    {
+        for(k = 0; k < DIM; k++)
+        {
+            k3_pos[i][k] = step * velocity3[i][k];
+            k3_vel[i][k] = step * force3[i][k]/mass[i];
+
+            position4[i][k] = position[i][k] + k3_pos[i][k] / 2;
+            velocity4[i][k] = velocity[i][k] + k3_vel[i][k] / 2;
+        }
+    }
+
+    calc_force(mass, position4, force4, N, epsilon);
+    for(i = 0; i < N; i++)
+    {
+        for(k = 0; k < DIM; k++)
+        {
+            k4_pos[i][k] = step * velocity4[i][k];
+            k4_vel[i][k] = step * force4[i][k]/mass[i];
+
+            position[i][k] +=  k1_pos[i][k] / 6 + k2_pos[i][k] / 3 + k3_pos[i][k] / 3 + k4_pos[i][k] / 6;
+            velocity[i][k] +=  k1_vel[i][k] / 6 + k2_vel[i][k] / 3 + k3_vel[i][k] / 3 + k4_vel[i][k] / 6;
+        }
+    }
+}
+
+#endif
