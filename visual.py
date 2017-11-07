@@ -69,7 +69,9 @@ def main(dataPath):
         movieDir += "/movie"
         if not os.path.isdir(movieDir):
             os.system("mkdir {}".format(movieDir))
-        os.system("ffmpeg -i {}_fig/data_%04d.jpg -pix_fmt yuv420p {}/{}.mp4".format(dataPath, movieDir, dataBasePath))
+        movieName = "{}/{}.mp4".format(movieDir, dataBasePath)
+        os.system("ffmpeg -i {}_fig/data_%04d.jpg -pix_fmt yuv420p {}".format(dataPath, movieName))
+        print("\n{} saved\n".format(movieName))
 
 if __name__ == "__main__":
 
