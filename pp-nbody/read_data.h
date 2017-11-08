@@ -9,7 +9,7 @@ void read_data(float mass[], float position[][DIM], float velocity[][DIM], int N
 
     FILE *fp;
 
-	fp = fopen("./data000.txt", "r");
+	fp = fopen(file_name, "r");
     if(fp == NULL)
         exit(-1);
 
