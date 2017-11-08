@@ -63,7 +63,7 @@ def demo():
         np.savetxt("demo1/data_{:04d}.txt".format(i), data)
         data = rotate(data)
 
-def single_plot(dataPath, azimuth=0, elevation=60):
+def single_plot(dataPath, azimuth=0, elevation=60, scale=None, distance=None):
     """ Input data as [m, x, y, z] """
 
     # transform data into [x, y, z, m]
@@ -73,20 +73,22 @@ def single_plot(dataPath, azimuth=0, elevation=60):
 
     mlab.clf()
     mlab.points3d(*data, color=(1, 1, 1), resolution=4, # colormap='viridis',
-                  scale_factor=0.1) #, extent=[-1, 1, -1, 1, -1, 1])
-    box = np.array([[-1, -1, 1, 1, -1, -1, 1, 1],
-                   [-1, 1, -1, 1, -1, 1, -1, 1],
-                   [-1, -1, -1, -1, 1, 1, 1, 1]])
-    scale = 7
-    box = scale * box
-    mlab.points3d(*box, color=(0, 0, 0))
+                  scale_factor=scale) #, extent=[-1, 1, -1, 1, -1, 1])
 
-    # control the angle of the camera
+    # add a artificial box
+    #box = np.array([[-1, -1, 1, 1, -1, -1, 1, 1],
+                   #[-1, 1, -1, 1, -1, 1, -1, 1],
+                   #[-1, -1, -1, -1, 1, 1, 1, 1]])
+    #scale = 7
+    #box = scale * box
+    #mlab.points3d(*box, color=(0, 0, 0))
+
+    ##### control the angle of the camera #####
     # view = mlab.view()
     # roll = mlab.roll()
     # mlab.view(*view)
     # mlab.roll(roll)
-    mlab.view(azimuth=azimuth, elevation=elevation)
+    mlab.view(distance=distance, azimuth=azimuth, elevation=elevation)
 
     # control the position of the camera
     f = mlab.gcf()
@@ -103,16 +105,16 @@ def single_plot(dataPath, azimuth=0, elevation=60):
     print(fName, "saved")
 
 
-def main(dataPath):
+def main(dataPath, scale, distance):
 
     if dataPath[-1] == '/':
         dataPath = dataPath[:-1]
 
     if os.path.isfile(dataPath):
-        single_plot(dataPath)
+        single_plot(dataPath, scale=scale, distance=distance)
     elif os.path.isdir(dataPath):
         for fn in glob.glob(dataPath + "/*"):
-            single_plot(fn)
+            single_plot(fn, scale=scale, distance=distance)
         topDir, dataBasePath = os.path.split(os.path.abspath(dataPath))
         movieDir = os.path.join(topDir, "movie")
         if not os.path.isdir(movieDir):
@@ -129,13 +131,24 @@ if __name__ == "__main__":
     #demo()
     #sys.exit()
 
-    if len(sys.argv) != 2:
-        raise SystemExit("usage: python visual.py path/to/data")
+    if len(sys.argv) < 2:
+        raise SystemExit("usage: python visual.py path/to/data [scale," \
+                         "distance] \nTypical values are: scale=0.02, distance=5]")
     dPath = sys.argv[1]
+    
+    if len(sys.argv) >=3:
+        s = np.double(sys.argv[2])
+    else:
+        s = 0.1
+
+    if len(sys.argv) >=4:
+        d = np.double(sys.argv[3])
+    else:
+        d = None
 
     mlab.figure(size=[1600, 1200], bgcolor=(0, 0, 0))
 
-    main(dPath)
+    main(dPath, scale=s, distance=d)
 
     # elif os.path.isdir(dPath):
     #     for fn in glob.glob(dPath):
