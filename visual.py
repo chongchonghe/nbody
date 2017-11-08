@@ -2,10 +2,12 @@ from __future__ import division, print_function
 import sys
 import os
 import glob
-from mayavi import mlab
 import numpy as np
+import matplotlib.pyplot as plt
+#import mayavi
+from mayavi import mlab
 
-def RandomParticle(N):
+def init(N):
     # Generate uniformly distributed particles inside a sphere, then stretched into an ellipsoid.
     # x^2/a^2 + y^2/b^2 + z^2/c^2 = 1
     N = 1000
@@ -21,11 +23,47 @@ def RandomParticle(N):
     for i, xx in zip(range(4), [m, x, y, z]):
         data[i, :] = xx
     data = np.transpose(data)
-    np.savetxt('data/data.txt', data)
-    # return data
+    return data
 
+def initLozenge(N):
+    x = np.random.random(N)
+    y = np.random.random(N) * 0.3
+    y = y * (-x + 1)
+    z = np.zeros(N)
+    mass = np.ones(N)
+    data = np.zeros([N, 4])
+    data[:, 0] = mass
+    data[:, 1] = x
+    data[:, 2] = y
+    data[:, 3] = z
+    data4 = np.ones([4*N, 4])
+    data4[:N, :] = data
+    data4[N:(2*N), 1] = -data[:, 1]
+    data4[N:(2*N), 2] = data[:, 2]
+    data4[N:(2*N), 3] = data[:, 3]
+    data4[(2*N):, 1] = data4[:(2*N), 1]
+    data4[(2*N):, 2] = -data4[:(2*N), 2]
+    data4[(2*N):, 3] = data4[:(2*N), 3]
+    return data4
 
-def single_plot(dataPath, azimuth=0, elevation=75):
+def rotate(data):
+    theta = 0.1
+    R = np.matrix([[np.cos(theta), -np.sin(theta), 0], 
+                   [np.sin(theta), np.cos(theta), 0], 
+                   [0, 0, 1]])
+    data[:, 1:4] = data[:, 1:4].dot(R)
+    return data
+
+def demo():
+    #data = init(1000)
+    data = initLozenge(100)
+    plt.plot(data[:,1], data[:,2], '.')
+    plt.savefig('demo1.pdf')
+    for i in range(10):
+        np.savetxt("demo1/data_{:04d}.txt".format(i), data)
+        data = rotate(data)
+
+def single_plot(dataPath, azimuth=0, elevation=60):
     """ Input data as [m, x, y, z] """
 
     # transform data into [x, y, z, m]
@@ -35,7 +73,13 @@ def single_plot(dataPath, azimuth=0, elevation=75):
 
     mlab.clf()
     mlab.points3d(*data, color=(1, 1, 1), resolution=4, # colormap='viridis',
-                  scale_factor=0.08)
+                  scale_factor=0.1) #, extent=[-1, 1, -1, 1, -1, 1])
+    box = np.array([[-1, -1, 1, 1, -1, -1, 1, 1],
+                   [-1, 1, -1, 1, -1, 1, -1, 1],
+                   [-1, -1, -1, -1, 1, 1, 1, 1]])
+    scale = 7
+    box = scale * box
+    mlab.points3d(*box, color=(0, 0, 0))
 
     # control the angle of the camera
     # view = mlab.view()
@@ -58,24 +102,32 @@ def single_plot(dataPath, azimuth=0, elevation=75):
     mlab.savefig(fName, magnification=True, quality=100, progressive=True)
     print(fName, "saved")
 
+
 def main(dataPath):
+
+    if dataPath[-1] == '/':
+        dataPath = dataPath[:-1]
 
     if os.path.isfile(dataPath):
         single_plot(dataPath)
     elif os.path.isdir(dataPath):
         for fn in glob.glob(dataPath + "/*"):
             single_plot(fn)
-        movieDir, dataBasePath = os.path.split(dataPath)
-        movieDir += "/movie"
+        topDir, dataBasePath = os.path.split(os.path.abspath(dataPath))
+        movieDir = os.path.join(topDir, "movie")
         if not os.path.isdir(movieDir):
             os.system("mkdir {}".format(movieDir))
         movieName = "{}/{}.mp4".format(movieDir, dataBasePath)
-        os.system("ffmpeg -i {}_fig/data_%04d.jpg -pix_fmt yuv420p {}".format(dataPath, movieName))
+        os.system("ffmpeg -i {}_fig/data_%04d.jpg -y -pix_fmt yuv420p {}".format(dataPath, movieName))
         print("\n{} saved\n".format(movieName))
+
 
 if __name__ == "__main__":
 
     # RandomParticle(1000)
+
+    #demo()
+    #sys.exit()
 
     if len(sys.argv) != 2:
         raise SystemExit("usage: python visual.py path/to/data")
