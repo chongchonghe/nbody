@@ -5,8 +5,8 @@ extern int DIM;  //number of dimensions
 
 void integ_RK4(float mass[], float position[][DIM], float velocity[][DIM], float force[][DIM], int N, float step, float epsilon)
 {
-    //update position and velocity using leapfrog
-    float kint;
+    //update position and velocity using RK4
+
     int i, k; //loop vars
 
     float k1_pos[N][DIM], k2_pos[N][DIM], k3_pos[N][DIM], k4_pos[N][DIM];
@@ -27,7 +27,7 @@ void integ_RK4(float mass[], float position[][DIM], float velocity[][DIM], float
         }
     }
 
-    calc_force(mass, position2, force2, N, epsilon);
+    calc_force(mass, position2, force2, N, epsilon); //force at k1
     for(i = 0; i < N; i++)
     {
         for(k = 0; k < DIM; k++)
@@ -40,7 +40,7 @@ void integ_RK4(float mass[], float position[][DIM], float velocity[][DIM], float
         }
     }
 
-    calc_force(mass, position3, force3, N, epsilon);
+    calc_force(mass, position3, force3, N, epsilon); //force at k2
     for(i = 0; i < N; i++)
     {
         for(k = 0; k < DIM; k++)
@@ -48,12 +48,12 @@ void integ_RK4(float mass[], float position[][DIM], float velocity[][DIM], float
             k3_pos[i][k] = step * velocity3[i][k];
             k3_vel[i][k] = step * force3[i][k]/mass[i];
 
-            position4[i][k] = position[i][k] + k3_pos[i][k] / 2;
-            velocity4[i][k] = velocity[i][k] + k3_vel[i][k] / 2;
+            position4[i][k] = position[i][k] + k3_pos[i][k];
+            velocity4[i][k] = velocity[i][k] + k3_vel[i][k];
         }
     }
 
-    calc_force(mass, position4, force4, N, epsilon);
+    calc_force(mass, position4, force4, N, epsilon); //force at k3
     for(i = 0; i < N; i++)
     {
         for(k = 0; k < DIM; k++)
