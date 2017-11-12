@@ -25,9 +25,9 @@ int main(int argc, char *argv[])
     float epsilon = 0.0;  //softening parameter
     float t_step = 0.05;  //time step
     int n_steps = 4836;   // number of steps
-    int op_freq = 1;    // output frequency
-    char *integrator = "RK4";  //ODE integration method
-    char *file_name = "init_2body.txt";   //name of initial conditions file
+    int op_freq = 4;    // output frequency
+    char *integrator = "LF2";  //ODE integration method
+    char *file_name = "init_2body0.5.txt";   //name of initial conditions file
 
     int i; //loop variable
 
