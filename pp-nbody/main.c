@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
         if( strcmp(integrator,"RK4") == 0 )
             integ_RK4(mass, position, velocity, force, N, t_step, epsilon);
         else if ( strcmp(integrator, "LF2") == 0 )
-            integ_LF2(mass, position, velocity, force, N, t_step);
+            integ_LF2(mass, position, velocity, force, N, t_step, epsilon);
         else
             return -1;
 
