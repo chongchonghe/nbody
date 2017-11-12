@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 #import mayavi
 from mayavi import mlab
 
+
 def init(N):
     # Generate uniformly distributed particles inside a sphere, then stretched into an ellipsoid.
     # x^2/a^2 + y^2/b^2 + z^2/c^2 = 1
@@ -133,7 +134,7 @@ if __name__ == "__main__":
 
     if len(sys.argv) < 2:
         raise SystemExit("usage: python visual.py path/to/data [scale," \
-                         "distance] \nTypical values are: scale=0.02, distance=5]")
+                         "distance] \nTypical values are: scale=0.1, distance=5]")
     dPath = sys.argv[1]
     
     if len(sys.argv) >=3:
@@ -149,8 +150,3 @@ if __name__ == "__main__":
     mlab.figure(size=[1600, 1200], bgcolor=(0, 0, 0))
 
     main(dPath, scale=s, distance=d)
-
-    # elif os.path.isdir(dPath):
-    #     for fn in glob.glob(dPath):
-    #         _data = raed_info(dPath)
-    #         make_plot(_data, figid=i, azimuth=i/3.0)

@@ -1,0 +1,29 @@
+\input{header.tex}
+
+\begin{document}
+
+\title{ASTR615 HW\#4}
+\author{Group 4: ChongChong He \& }
+\date{\today}
+\maketitle
+
+\section*{Problem 2}
+\subsection{Mass distribution}
+We implement in all of our simulations the Kroupa IMF in the form:
+\begin{equation}
+\phi(m) \propto 
+\begin{cases}
+m^{-1.3} \; &(0.08M_\odot < m < 0.5M_\odot) \\
+0.5 \, m^{-2.3} \; &(0.5M_\odot<m<100M_\odot)
+\end{cases}
+\end{equation}
+\begin{equation}
+m=
+	\begin{cases}
+	-\cfrac{0.566179}{\sqrt[3]{1.7987\, - x} \left(x^3-5.39611 
+	x^2+9.70599 x-5.81939\right)} & 0<x<0.760707\\
+	\cfrac{0.166558}{(1.00024\, -x)^{10/13}} & 0.760707<x<1
+	\end{cases}
+\end{equation}
+
+\end{document}
