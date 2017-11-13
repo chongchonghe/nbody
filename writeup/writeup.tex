@@ -9,7 +9,7 @@
 
 \section*{Problem 2}
 \subsection*{Mass distribution}
-We implement in all of our simulations the Kroupa IMF in the form:
+We implement in all of our simulations the Kroupa IMF:
 \begin{equation}
 \phi(m) \propto 
 \begin{cases}
@@ -22,12 +22,37 @@ after doing transformation we get
 m=
 	\begin{cases}
 	-\cfrac{0.566179}{\sqrt[3]{1.7987\, - x} \left(x^3-5.39611 
-	x^2+9.70599 x-5.81939\right)} & 0<x<0.760707\\
-	\cfrac{0.166558}{(1.00024\, -x)^{10/13}} & 0.760707<x<1
+	x^2+9.70599 x-5.81939\right)} & (0<x<0.760707)\\
+	\cfrac{0.166558}{(1.00024\, -x)^{10/13}} & (0.760707<x<1)
 	\end{cases}
 \end{equation}
 
 \subsection*{Morphology}
+We use disk galaxies in our simulation. Each disk galaxy has two components: a 
+thin disk and a thick disk. Each component has a density profile $ \rho(r, h) = 
+\rho_0 \, e^{-r/r_{\rm H}} \, e^{-h/h_{\rm H}} $. $ r $ and $ h $ are given by the 
+solution to the equation
+\begin{equation}\label{key}
+	x = 1 - (1 + \frac{r}{r_{\rm H}}) \, e^{-\frac{r}{r_{\rm H}}}
+\end{equation}
+where $ x $ is a uniform random number between 0 and 1.
 
+\subsection*{Disk Rotation}
+We use a uniform angular velocity $ \omega $.
+
+\subsection*{Setups}
+\begin{table}[h]
+	\centering
+	\begin{tabular}{ccccc}
+%		\hline{}
+		& $M/M_\odot$ & $r_{\rm H}$/kpc & $h_{\rm H} $/kpc & $\omega/?$ \\
+		\hline
+		thin disk & $5 \times 10^{10}$ & 3.5 & 0.3 & 1? \\
+		thick disk & $ 0.75 \times 10^{10} $ & 3.5 & 1.0 & 1? \\
+%		\hline
+	\end{tabular}
+	\caption{Parameters and errors from Lorentzian and Gaussian fits.}
+	\label{fit params}
+\end{table}
 
 \end{document}
