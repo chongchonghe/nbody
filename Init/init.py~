@@ -1,0 +1,116 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+init.py
+Produces the initial conditions for our simulations.
+Created on Sun Nov 12 00:29:03 2017
+@author: chongchonghe
+"""
+
+from __future__ import print_function, division
+import numpy as np
+import matplotlib.pyplot as plt
+from kroupa import kroupa, imf
+from morphology import rx, ExpRandom
+
+def disks(N, scaleR, scaleH):
+    """ rho(r) = rho(0) * exp(-r/scaleR) """
+
+    r = ExpRandom(N, scaleR)
+    H = ExpRandom(N, scaleH)
+    theta = np.random.random(N) * 2 * np.pi
+    x = r * np.cos(theta)
+    y = r * np.sin(theta)
+    sides = np.random.random(N)
+    sides = [-1 if side < 0.5 else 1 for side in sides]
+    z = H * np.array(sides)
+    return x, y, z
+
+def rotate(arr, theta, phi, x, y, z):
+    """ Equivalent to Ry(theta) * Rz(phi) 
+    arr' = arr * Ry(theta)^T * Rz(phi)^T
+    """
+#    Rx = np.array([[1, 0, 0],
+#                  [0, np.cos(xtheta), -np.sin(xtheta)],
+#                  [0, np.sin(xtheta), np.cos(xtheta)]])
+    Rytheta = np.array([[np.cos(theta), 0, np.sin(theta)],
+                    [0, 1, 0],
+                    [-np.sin(theta), 0, np.cos(theta)]])
+    Rzphi = np.array([[np.cos(phi), -np.sin(phi), 0],
+                    [np.sin(phi), np.cos(phi), 0],
+                    [0, 0, 1]])
+    arr1 = np.dot(arr, np.transpose(Rytheta)))
+    arr2 = np.dot(arr1, np.transpose(Rzphi))
+    arr3 = 
+
+def rotation_matrix(angle, direction, point=None):
+    """Return matrix to rotate about axis defined by point and direction.
+
+    >>> R = rotation_matrix(math.pi/2, [0, 0, 1], [1, 0, 0])
+    >>> numpy.allclose(numpy.dot(R, [0, 0, 0, 1]), [1, -1, 0, 1])
+    True
+    >>> angle = (random.random() - 0.5) * (2*math.pi)
+    >>> direc = numpy.random.random(3) - 0.5
+    >>> point = numpy.random.random(3) - 0.5
+    >>> R0 = rotation_matrix(angle, direc, point)
+    >>> R1 = rotation_matrix(angle-2*math.pi, direc, point)
+    >>> is_same_transform(R0, R1)
+    True
+    >>> R0 = rotation_matrix(angle, direc, point)
+    >>> R1 = rotation_matrix(-angle, -direc, point)
+    >>> is_same_transform(R0, R1)
+    True
+    >>> I = numpy.identity(4, numpy.float64)
+    >>> numpy.allclose(I, rotation_matrix(math.pi*2, direc))
+    True
+    >>> numpy.allclose(2, numpy.trace(rotation_matrix(math.pi/2,
+    ...                                               direc, point)))
+    True
+
+    """
+    sina = math.sin(angle)
+    cosa = math.cos(angle)
+    direction = unit_vector(direction[:3])
+    # rotation matrix around unit vector
+    R = numpy.diag([cosa, cosa, cosa])
+    R += numpy.outer(direction, direction) * (1.0 - cosa)
+    direction *= sina
+    R += numpy.array([[ 0.0,         -direction[2],  direction[1]],
+                      [ direction[2], 0.0,          -direction[0]],
+                      [-direction[1], direction[0],  0.0]])
+    M = numpy.identity(4)
+    M[:3, :3] = R
+    if point is not None:
+        # rotation not around origin
+        point = numpy.array(point[:3], dtype=numpy.float64, copy=False)
+        M[:3, 3] = point - numpy.dot(R, point)
+    return M
+
+
+##### The Milky Way Galaxy #####
+
+# think disk
+N1 = 1000
+scaleR = 3.5
+scaleH = 0.3
+mass1 = imf(N1)
+x1, y1, z1 = disks(N1, scaleR, scaleH)
+
+# thick disk
+N2 = int(N1 * 0.15)
+scaleR = 3.5
+scaleH = 1.0
+mass2 = imf(N2)
+x2, y2, z2, = disks(N2, scaleR, scaleH)
+
+data = np.zeros([N1 + N2, 4])
+data[:N1, 0] = mass1
+data[:N1, 1] = x1
+data[:N1, 2] = y1
+data[:N1, 3] = z1
+data[N1:, 0] = mass2
+data[N1:, 1] = x2
+data[N1:, 2] = y2
+data[N1:, 3] = z2
+
+np.savetxt('disk/disk.txt', data)

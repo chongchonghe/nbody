@@ -10,7 +10,7 @@ Created on Sat Nov 11 12:10:22 2017
 
 from __future__ import print_function, division
 import numpy as np
-import plotstyle
+#import plotstyle
 import matplotlib.pyplot as plt
 
 def kroupa(x):
@@ -45,7 +45,6 @@ def imf_theory(m, N):
         return None
 
 def main(N):
-    
     # plot a histogram of the samples
     mass = imf(N)
     bins = np.logspace(np.log10(0.08), 2, 36)
