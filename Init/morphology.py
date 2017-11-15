@@ -27,3 +27,13 @@ def ExpRandom(N, h):
     x = np.random.random(N)
     sample = [rx(xx, h) for xx in x]
     return sample
+
+###############
+    
+#def ExpRandom(N, h):
+#    x = np.random.random(N)
+#    sample = []
+#    for xx in x:
+#        if 
+#        sample.append(- np.log(x) * h)
+#    return sample

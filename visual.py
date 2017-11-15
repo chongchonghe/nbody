@@ -213,8 +213,8 @@ if __name__ == "__main__":
     if len(sys.argv) < 3:
         raise SystemExit("usage: python visual.py data.txt parameters.ini")
 
-    dPath = sys.argv[1]
-    p = Parameters(sys.argv[2])
+    dPath = sys.argv[2]
+    p = Parameters(sys.argv[1])
     
     mlab.figure(size=[1600, 1200], bgcolor=(0, 0, 0))
     main(dPath)
