@@ -6,6 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 #import mayavi
 from mayavi import mlab
+import json
 try:
     import configparser as cp
 except ImportError:
@@ -63,11 +64,16 @@ class Parameters():
         else:
             print("Escaping resolution")
 
+        if config.has_option("main", "focalpoint"):
+            self.focalpoint = json.loads(config.get("main", "focalpoint"))
+        else:
+            print("Escaping focalpoint")
+
         if config.has_option("advanced", "phiChange"):
             self.phiChange = config.getfloat("advanced", "phiChange")
         else:
             print("Escaping phiChange")
-
+            
         if config.has_option("advanced", "thetaChange"):
             self.thetaChange = config.getfloat("advanced", "thetaChange")
         else:
@@ -120,7 +126,8 @@ def single_plot(dataPath, azimuth=0, elevation=0, scale=None, distance=None,
     # mlab.roll(roll)
     print("distance={}, azimuth={}, ele={}, reso={}".format(distance, 
             azimuth, elevation, resolution))
-    mlab.view(distance=distance, azimuth=azimuth, elevation=elevation)
+    mlab.view(distance=distance, azimuth=azimuth, elevation=elevation,
+              focalpoint=p.focalpoint)
 
     # control the position of the camera
     # f = mlab.gcf()

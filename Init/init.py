@@ -231,7 +231,7 @@ def main():
 
 if __name__ == "__main__":
     
-    g = main()
+    g = main()g
     
 #    data = main()
 #    freq = 4000

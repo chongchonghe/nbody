@@ -15,13 +15,15 @@ import sys
 plt.figure()
 #plt.show()
 
+boxlen = np.double(sys.argv[2])
+
 for fn in glob.glob(sys.argv[1] + "/*"):
     data = np.loadtxt(fn)
     x = data[:, 1]
     y = data[:, 2]
     plt.clf()
-    plt.xlim([-25, 25])
-    plt.ylim([-25, 25])
+    plt.xlim([-boxlen, boxlen])
+    plt.ylim([-boxlen, boxlen])
     plt.plot(x[:-1], y[:-1], '.')
     plt.plot(x[-1], y[-1], 'r.')
     #plt.draw()
