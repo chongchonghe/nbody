@@ -67,7 +67,14 @@ class Parameters():
         if config.has_option("main", "focalpoint"):
             self.focalpoint = json.loads(config.get("main", "focalpoint"))
         else:
+            self.focalpoint = [0, 0, 0]
             print("Escaping focalpoint")
+
+        if config.has_option("main", "hold"):
+            self.hold = config.getboolean("main", "hold")
+        else:
+            self.hold = False
+            print("Escaping hold")
 
         if config.has_option("advanced", "phiChange"):
             self.phiChange = config.getfloat("advanced", "phiChange")
@@ -111,19 +118,12 @@ def single_plot(dataPath, azimuth=0, elevation=0, scale=None, distance=None,
     mlab.points3d(*data, color=(1, 1, 1), resolution=resolution, # colormap='viridis',
                   scale_factor=scale) #, extent=[-1, 1, -1, 1, -1, 1])
 
-    # add a artificial box
-    #box = np.array([[-1, -1, 1, 1, -1, -1, 1, 1],
-                   #[-1, 1, -1, 1, -1, 1, -1, 1],
-                   #[-1, -1, -1, -1, 1, 1, 1, 1]])
-    #scale = 7
-    #box = scale * box
-    #mlab.points3d(*box, color=(0, 0, 0))
-
     ##### control the angle of the camera #####
     # view = mlab.view()
     # roll = mlab.roll()
     # mlab.view(*view)
     # mlab.roll(roll)
+
     print("distance={}, azimuth={}, ele={}, reso={}".format(distance, 
             azimuth, elevation, resolution))
     mlab.view(distance=distance, azimuth=azimuth, elevation=elevation,
@@ -143,8 +143,11 @@ def single_plot(dataPath, azimuth=0, elevation=0, scale=None, distance=None,
         fName = os.path.join(figDir, path0[:-4] + '.jpg')
     else:
         fName = os.path.join(figDir, path0[:-4] + "{:04d}.jpg".format(index))
-    mlab.savefig(fName, magnification=True, quality=100, progressive=True)
-    print(fName, "saved")
+    if not p.hold:
+        mlab.savefig(fName, magnification=True, quality=100, progressive=True)
+        print(fName, "saved")
+    else:
+        mlab.show()
 
 
 def main(dataPath):
@@ -169,6 +172,7 @@ def main(dataPath):
 
     N = len(datafiles)
     if N >= 2:
+        p.hold = False
         if p.phiChange is not None:
             dphi = p.phiChange / (N - 1)
         else:

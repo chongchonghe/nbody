@@ -34,7 +34,6 @@ print("boxlen =", boxlen)
 T = boxlen / sigma
 print("The dispersion crossing time is", T)
 
-
 # Units
 u_l = 0.308000000000000E+19
 u_rho = 0.232474340000000E-23
