@@ -23,11 +23,11 @@ int main(int argc, char *argv[])
 
     int N = 2;   //number of particles
     float epsilon = 0.0;  //softening parameter
-    float t_step = 0.05;  //time step
-    int n_steps = 4836;   // number of steps
-    int op_freq = 4;    // output frequency
-    char *integrator = "LF2";  //ODE integration method
-    char *file_name = "init_2body0.5.txt";   //name of initial conditions file
+    float t_step = 0.001;  //time step
+    int n_steps = 10000;   // number of steps
+    int op_freq = 10;    // output frequency
+    char *integrator = "RK4";  //ODE integration method
+    char *file_name = "2body2.txt";   //name of initial conditions file
 
     int i; //loop variable
 
@@ -65,6 +65,19 @@ int main(int argc, char *argv[])
     {
         calc_force(mass, position, force, N, epsilon);
 
+//        for(int j = 0; j < N; j++)
+//        {
+//            //format m x y z xdot ydot zdot
+//            printf("%f ", mass[j]);
+//            for(int k = 0; k < DIM; k++)
+//                printf("%f ", position[j][k]);
+//            for(int k = 0; k < DIM; k++)
+//                printf("%f ", velocity[j][k]);
+//            for(int k = 0; k < DIM; k++)
+//                printf("%f ", force[j][k]);
+//            printf("\n");
+//        }
+//        break;
         if( strcmp(integrator,"RK4") == 0 )
             integ_RK4(mass, position, velocity, force, N, t_step, epsilon);
         else if ( strcmp(integrator, "LF2") == 0 )
