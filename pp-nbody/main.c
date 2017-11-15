@@ -19,9 +19,8 @@ int DIM = 3;  //number of dimensions
 
 int main(int argc, char *argv[])
 {
-    // Usage: ./main file_name N epsilon t_step n_steps op_freq [integrator]
-
     const char *file_name;   //name of initial conditions file
+    const char *outputdir;  // dir of output files
     int N = 2;   //number of particles
     double epsilon = 0.0;  //softening parameter
     double t_step = 0.01;  //time step
@@ -32,29 +31,38 @@ int main(int argc, char *argv[])
     
     int i; //loop variable
     
-    if ((argc == 7) || (argc == 8)) {
+    if ((argc == 8) || (argc == 9)) {
         //check user input
+
         file_name = argv[1];
-        for (i=0; i<strlen(argv[2]); i++)
-            assert(isdigit(argv[2][i]));
-        N = atoi(argv[2]);
-        epsilon = atof(argv[3]);
+
+        outputdir = argv[2];
+
+        for (i=0; i<strlen(argv[3]); i++)
+            assert(isdigit(argv[3][i]));
+        N = atoi(argv[3]);
+
+        epsilon = atof(argv[4]);
         assert(epsilon >= 0.0);
-        t_step = atof(argv[4]);
+
+        t_step = atof(argv[5]);
         assert(t_step >= 1e-8);
-        for (i=0; i<strlen(argv[5]); i++)
-            assert(isdigit(argv[5][i]));
-        n_steps = atoi(argv[5]);
+
         for (i=0; i<strlen(argv[6]); i++)
             assert(isdigit(argv[6][i]));
-        op_freq = atof(argv[6]);
-        if (argc == 8)
-            integrator = argv[7];
+        n_steps = atoi(argv[6]);
+
+        for (i=0; i<strlen(argv[7]); i++)
+            assert(isdigit(argv[7][i]));
+        op_freq = atof(argv[7]);
+
+        if (argc == 9)
+            integrator = argv[9];
         else
             integrator = "LF2";
     }
     else {
-        printf("Usage: ./main fname N epsilon t_step n_steps op_freq [integrator]\n");
+        printf("Usage: ./main fname outputdir N epsilon t_step n_steps op_freq [integrator]\n");
         return -1;
     }
 
@@ -110,7 +118,7 @@ int main(int argc, char *argv[])
             return -1;
 
         if(i % op_freq == 0)
-            save_data(mass, position, velocity, N, (int)(i/op_freq));
+            save_data(mass, position, velocity, N, (int)(i/op_freq), outputdir);
     }
 
     return 0;
