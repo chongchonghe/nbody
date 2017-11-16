@@ -3,9 +3,11 @@
 
 extern int DIM;
 
-void calc_force(float mass[], float position[][DIM], float force[][DIM], int N, float epsilon)
+void calc_force(double mass[], double position[][DIM], double force[][DIM], int N, double epsilon)
 {
-    float dist_sq, khat, fij;
+    /*calculate force on each particle*/
+
+    double dist_sq, khat, fij;
     int i, j, k; //loop variables
 
     for(int i = 0; i < N; i++)
@@ -21,7 +23,7 @@ void calc_force(float mass[], float position[][DIM], float force[][DIM], int N, 
             for(k = 0; k < DIM; k++)
                 dist_sq += (position[i][k] - position[j][k])*(position[i][k] - position[j][k]);
 
-            //calculate force per unit mass between i and j
+            //calculate force between i and j
             for(k = 0; k < DIM; k++)
             {
                 khat = (position[i][k] - position[j][k]) / sqrt(dist_sq);

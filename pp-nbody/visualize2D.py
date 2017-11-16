@@ -4,7 +4,7 @@ import numpy as np
 import os
 
 # load the data file and separate out the parameters
-N = 2
+N = 3
 
 data_files = sorted([name for name in os.listdir('./data/')])
 

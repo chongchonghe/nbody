@@ -3,17 +3,17 @@
 
 extern int DIM;  //number of dimensions
 
-void integ_RK4(float mass[], float position[][DIM], float velocity[][DIM], float force[][DIM], int N, float step, float epsilon)
+void integ_RK4(double mass[], double position[][DIM], double velocity[][DIM], double force[][DIM], int N, double step, double epsilon)
 {
-    //update position and velocity using RK4
+    /*update position and velocity using 4th order Runge-Kutta*/
 
     int i, k; //loop vars
 
-    float k1_pos[N][DIM], k2_pos[N][DIM], k3_pos[N][DIM], k4_pos[N][DIM];
-    float k1_vel[N][DIM], k2_vel[N][DIM], k3_vel[N][DIM], k4_vel[N][DIM];
-    float position2[N][DIM], position3[N][DIM], position4[N][DIM];
-    float velocity2[N][DIM], velocity3[N][DIM], velocity4[N][DIM];
-    float force2[N][DIM], force3[N][DIM], force4[N][DIM];
+    double k1_pos[N][DIM], k2_pos[N][DIM], k3_pos[N][DIM], k4_pos[N][DIM];
+    double k1_vel[N][DIM], k2_vel[N][DIM], k3_vel[N][DIM], k4_vel[N][DIM];
+    double position2[N][DIM], position3[N][DIM], position4[N][DIM];
+    double velocity2[N][DIM], velocity3[N][DIM], velocity4[N][DIM];
+    double force2[N][DIM], force3[N][DIM], force4[N][DIM];
 
     for(i = 0; i < N; i++)
     {
