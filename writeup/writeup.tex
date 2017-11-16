@@ -8,6 +8,7 @@
 \maketitle
 
 \section*{Problem 2}
+We perform a simulation of a cluster with Kroupa IMF.
 \subsection*{Mass distribution}
 We implement in all of our simulations the Kroupa IMF:
 \begin{equation}
@@ -27,35 +28,49 @@ m=
 	\end{cases}
 \end{equation}
 
-\subsection*{Morphology}
-We use disk galaxies in our simulation. Each disk galaxy has two components: a 
-thin disk and a thick disk. Each component has a density profile $ \rho(r, h) = 
-\rho_0 \, e^{-r/r_{\rm H}} \, e^{-h/h_{\rm H}} $. $ r $ and $ h $ are given by the 
-solution to the equation
-\begin{equation}\label{key}
-	x = 1 - (1 + \frac{r}{r_{\rm H}}) \, e^{-\frac{r}{r_{\rm H}}}
-\end{equation}
-where $ x $ is a uniform random number between 0 and 1.
+\subsection*{Initial setup}
+The cluster is a specially uniformly distributed sphere with a radius of 1. The inital 
+velocities are from a  Gaussian distribution with a dispersion correspondent to a virial ratio 
+of $ \alpha \sim 0.4 $. A virial ratio $ \alpha < 0.5 $ implies the system is bounded. The 
+velocity dispersion crossing time is $ t \approx 0.08 $, so we use a step size of 0.001, i.e. 
+80 steps per course time.
 
-\subsection*{Disk Rotation}
-We use a uniform angular velocity $ \omega $.
+\subsection{Video}
+The video of this specific setup is \textit{simulations/cluster03.mp4}.
 
-\subsection*{Setups}
-\begin{table}[h]
-	\centering
-	\begin{tabular}{ccccc}
-%		\hline{}
-		& $M/M_\odot$ & $r_{\rm H}$/kpc & $h_{\rm H} $/kpc & $\omega/?$ \\
-		\hline
-		thin disk & $5 \times 10^{10}$ & 3.5 & 0.3 & 1? \\
-		thick disk & $ 0.75 \times 10^{10} $ & 3.5 & 1.0 & 1? \\
+%../pp-nbody/a.out cluster03.txt cluster03 1000 0.01 0.001 200 1
+
+
+%\subsection*{Morphology}
+%We use disk galaxies in our simulation. Each disk galaxy has two components: a 
+%thin disk and a thick disk. Each component has a density profile $ \rho(r, h) = 
+%\rho_0 \, e^{-r/r_{\rm H}} \, e^{-h/h_{\rm H}} $. $ r $ and $ h $ are given by the 
+%solution to the equation
+%\begin{equation}\label{key}
+%	x = 1 - (1 + \frac{r}{r_{\rm H}}) \, e^{-\frac{r}{r_{\rm H}}}
+%\end{equation}
+%where $ x $ is a uniform random number between 0 and 1.
+%
+%\subsection*{Disk Rotation}
+%We use a uniform angular velocity $ \omega $.
+
+%\subsection*{Setups}
+%\begin{table}[h]
+%	\centering
+%	\begin{tabular}{ccccc}
+%%		\hline{}
+%		& $M/M_\odot$ & $r_{\rm H}$/kpc & $h_{\rm H} $/kpc & $\omega/?$ \\
 %		\hline
-	\end{tabular}
-	\caption{Parameters and errors from Lorentzian and Gaussian fits.}
-	\label{fit params}
-\end{table}
+%		thin disk & $5 \times 10^{10}$ & 3.5 & 0.3 & 1? \\
+%		thick disk & $ 0.75 \times 10^{10} $ & 3.5 & 1.0 & 1? \\
+%%		\hline
+%	\end{tabular}
+%	\caption{Parameters and errors from Lorentzian and Gaussian fits.}
+%	\label{fit params}
+%\end{table}
+%
+%\subsection{Units}
+%[L] = kpc, [M] = $ 10^9 M_\odot $, [T] = 14.91 Myr.
 
-\subsection{Units}
-[L] = kpc, [M] = $ 10^9 M_\odot $, [T] = 14.91 Myr.
 
 \end{document}
