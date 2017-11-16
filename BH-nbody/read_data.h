@@ -3,12 +3,13 @@
 
 extern int DIM;
 
-void read_data(float mass[], float position[][DIM], float velocity[][DIM], int N, char *file_name)
+void read_data(double mass[], double position[][DIM], double velocity[][DIM], int N, char *file_name)
 {
+    /*read data from file_name
+    format: m x y z xdot ydot zdot*/
     int i, k;
 
     FILE *fp;
-
 	fp = fopen(file_name, "r");
     if(fp == NULL)
         exit(-1);
@@ -16,11 +17,11 @@ void read_data(float mass[], float position[][DIM], float velocity[][DIM], int N
     for(i = 0; i < N; i++)
     {
         //format: m x y z xdot ydot zdot
-        fscanf(fp, "%f", &mass[i]);
+        fscanf(fp, "%lf", &mass[i]);
         for(k = 0; k < DIM; k++)
-            fscanf(fp, "%f", &position[i][k]);
+            fscanf(fp, "%lf", &position[i][k]);
         for(k = 0; k < DIM; k++)
-            fscanf(fp, "%f", &velocity[i][k]);
+            fscanf(fp, "%lf", &velocity[i][k]);
     }
     fclose(fp);
 }
