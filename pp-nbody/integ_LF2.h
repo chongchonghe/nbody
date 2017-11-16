@@ -3,14 +3,14 @@
 
 extern int DIM;  //number of dimensions
 
-void integ_LF2(float mass[], float position[][DIM], float velocity[][DIM], float force[][DIM], int N, float step, float epsilon)
+void integ_LF2(double mass[], double position[][DIM], double velocity[][DIM], double force[][DIM], int N, double step, double epsilon)
 {
-    /*update position and velocity using leapfrog*/
+    /*update position and velocity using 2nd order leapfrog*/
 
     int i, k; //loop vars
 
     //calculate position after half a step
-    float pos_12[N][DIM];
+    double pos_12[N][DIM];
     for(i = 0; i < N; i++)
         for(k = 0; k < DIM; k++)
             pos_12[i][k] = position[i][k] + 0.5 * step * velocity[i][k];

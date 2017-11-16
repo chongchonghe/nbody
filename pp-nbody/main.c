@@ -19,18 +19,16 @@ int DIM = 3;  //number of dimensions
 
 int main(int argc, char *argv[])
 {
-    const char *file_name;   //name of initial conditions file
-    const char *outputdir;  // dir of output files
-    int N = 2;   //number of particles
+    char *file_name = "3body.txt";;   //name of initial conditions file
+    char *outputdir = "./data/";  // dir of output files
+    int N = 3;   //number of particles
     double epsilon = 0.0;  //softening parameter
     double t_step = 0.01;  //time step
-    int n_steps = 5;   // number of steps
-    int op_freq = 1;    // output frequency
-    
-    const char *integrator;  //ODE integration method
-    
+    int n_steps = 10000;   // number of steps
+    int op_freq = 10;    // output frequency
+    char *integrator = "LF2";  //ODE integration method
     int i; //loop variable
-    
+
     if ((argc == 8) || (argc == 9)) {
         //check user input
 
@@ -61,48 +59,15 @@ int main(int argc, char *argv[])
         else
             integrator = "LF2";
     }
-    else {
-        printf("Usage: ./main fname outputdir N epsilon t_step n_steps op_freq [integrator]\n");
-        return -1;
-    }
+//    else {
+//        printf("Usage: ./main fname outputdir N epsilon t_step n_steps op_freq [integrator]\n");
+//        return -1;
+//    }
 
-    /* int N = 2;   //number of particles */
-    /* float epsilon = 0.0;  //softening parameter */
-    /* float t_step = 0.05;  //time step */
-    /* int n_steps = 4836;   // number of steps */
-    /* int op_freq = 4;    // output frequency */
-    /* char *integrator = "LF2";  //ODE integration method */
-    /* char *file_name = "init_2body0.5.txt";   //name of initial conditions file */
-
-    /* int i; //loop variable */
-
-    /* if (argc > 1) { */
-    /*     if (argc != 8) { */
-    /*         printf("Usage: ./main [N epsilon t_step n_steps op_freq integ fname]\n"); */
-    /*         return -1; */
-    /*     } */
-    /*     //check user input */
-    /*     for (i=0; i<strlen(argv[1]); i++) */
-    /*         assert(isdigit(argv[1][i])); */
-    /*     N = atoi(argv[1]); */
-    /*     epsilon = atof(argv[2]); */
-    /*     assert(epsilon >= 0.0); */
-    /*     t_step = atof(argv[3]); */
-    /*     assert(t_step >= 1e-8); */
-    /*     for (i=0; i<strlen(argv[4]); i++) */
-    /*         assert(isdigit(argv[4][i])); */
-    /*     n_steps = atoi(argv[4]); */
-    /*     for (i=0; i<strlen(argv[5]); i++) */
-    /*         assert(isdigit(argv[5][i])); */
-    /*     op_freq = atof(argv[5]); */
-    /*     integrator = argv[6]; */
-    /*     file_name = argv[7]; */
-    /* } */
-
-    float mass[N];
-    float position[N][DIM];
-    float velocity[N][DIM];
-    float force[N][DIM];
+    double mass[N];
+    double position[N][DIM];
+    double velocity[N][DIM];
+    double force[N][DIM];
 
     read_data(mass, position, velocity, N, file_name);  //read initial pos and vel from file
 

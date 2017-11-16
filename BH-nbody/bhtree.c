@@ -16,9 +16,9 @@
 #include <assert.h>
 
 #include "read_data.h"
-#include "integ_LF2.h"
-#include "integ_RK4.h"
-#include "save_data.h"
+//#include "integ_LF2.h"
+//#include "integ_RK4.h"
+//#include "save_data.h"
 
 /* particle definitions */
 
@@ -33,6 +33,8 @@ typedef struct {
 /* tree definitions */
 
 #define CELLS_PER_NODE 8 /* oct-tree (3-D) */
+
+int DIM = 3;  //number of dimensions
 
 struct node_s {
   double cmin[3], cmax[3], pos[3];
@@ -231,6 +233,22 @@ void build_tree(int n, const DATA *data, NODE **root)
 	}
 
 
+void direct_force(const DATA *point, NODE *node, double *force)
+{
+    int i;
+    double epsilon = 0;
+    double ihat;
+
+    double dist_sq = 0;
+    for(i = 0; i < DIM; i++)
+        dist_sq += (point->pos[i] - node->cog[i]) * (point->pos[i] - node->cog[i]);
+
+    for(i = 0; i < DIM; i++){
+        ihat = (point->pos[i] - node->cog[i]) / sqrt(dist_sq);
+        force[i] -= point->mass * node->mass * ihat / (dist_sq + epsilon*epsilon);;
+    }
+}
+
 void add_to_force(const DATA *point, NODE *node, double *force)
 {
     /* data[i].pos[0]: x position of particle i
@@ -241,80 +259,51 @@ void add_to_force(const DATA *point, NODE *node, double *force)
     double theta_crit = 0.6;
 
     double dist_sq = 0;
-    for(int i = 0; i < 3; i++)
+    for(i = 0; i < DIM; i++)
         dist_sq += (point->pos[i] - node->cog[i]) * (point->pos[i] - node->cog[i]);
 
     cell_size = ((node->cmax[0] - node->cmin[0]) +
                  (node->cmax[1] - node->cmin[1]) +
                  (node->cmax[2] - node->cmin[2])) / 3;
-    theta = cell_size / sqrt(dist_sq);
 
-    if (theta < theta_crit)
-        direct_force(point, node, force);
-    else {
-        for (int i = 0; i < CELLS_PER_NODE; i++) {
-            if (node->cell[i] != NULL) //is cell a node?
-                add_to_force(point, node->cell[i], force);
-            else if (node->leaf[i] != NULL) { //is cell a leaf?
-                direct_force(point, node->leaf[i], force);
-                //break; //why break?
+    for(i = 0; i < DIM; i++)
+        printf("%lf ", point->pos[i]);
+    printf("*****************\n");
+    for(i = 0; i < DIM; i++)
+        printf("%lf ", force[i]);
+    printf("*****************\n");
+
+    if(dist_sq != 0){
+        theta = cell_size / sqrt(dist_sq);
+        printf("%f \n",theta);///////////////
+        if (theta < theta_crit)
+            direct_force(point, node, force);
+        else {
+            for (i = 0; i < CELLS_PER_NODE; i++) {
+                if (node->cell[i] != NULL) //is cell a node?
+                    add_to_force(point, node->cell[i], force);
+                else if (node->leaf[i] != NULL) { //is cell a leaf?
+                    direct_force(point, node->leaf[i], force);
+                    //break; //why break?
+                }
             }
         }
     }
 }
 
-void direct_force(const DATA *point, NODE *node, double *force)
-{
-    int i;
-    double epsilon = 0;
-    double ihat;
-
-    double dist_sq = 0;
-    for(i = 0; i < 3; i++)
-        dist_sq += (point->pos[i] - node->cog[i]) * (point->pos[i] - node->cog[i]);
-
-    for(i = 0; i < 3; i++){
-        ihat = (point->pos[i] - node->cog[i]) / sqrt(dist_sq);
-        force[i] -= point->mass * node->mass * ihat / (dist_sq + epsilon*epsilon);;
-    }
-}
-
 int main(int argc, char *argv[])
 {
-        // Usage: ./main [N epsilon t_step n_steps op_freq integ fname]
+    // Usage: ./main [N epsilon t_step n_steps op_freq integ fname]
 
+    char *file_name = "init_2body0.5.txt";;   //name of initial conditions file
+    char *outputdir = "./data/";  // dir of output files
     int N = 2;   //number of particles
     double epsilon = 0.0;  //softening parameter
-    double t_step = 0.05;  //time step
-    int n_steps = 4836;   // number of steps
-    int op_freq = 4;    // output frequency
+    double t_step = 0.01;  //time step
+    int n_steps = 10000;   // number of steps
+    int op_freq = 10;    // output frequency
     char *integrator = "LF2";  //ODE integration method
-    char *file_name = "init_2body0.5.txt";   //name of initial conditions file
-
-    int i,j,k; //loop variable
-
-    if (argc > 1) {
-        if (argc != 8) {
-            printf("Usage: ./main [N epsilon t_step n_steps op_freq integ fname]\n");
-            return -1;
-        }
-        //check user input
-        for (i=0; i<strlen(argv[1]); i++)
-            assert(isdigit(argv[1][i]));
-        N = atoi(argv[1]);
-        epsilon = atof(argv[2]);
-        assert(epsilon >= 0.0);
-        t_step = atof(argv[3]);
-        assert(t_step >= 1e-8);
-        for (i=0; i<strlen(argv[4]); i++)
-            assert(isdigit(argv[4][i]));
-        n_steps = atoi(argv[4]);
-        for (i=0; i<strlen(argv[5]); i++)
-            assert(isdigit(argv[5][i]));
-        op_freq = atof(argv[5]);
-        integrator = argv[6];
-        file_name = argv[7];
-    }
+    int i,j,k; //loop variables
 
     double mass[N];
     double position[N][3];
@@ -322,7 +311,6 @@ int main(int argc, char *argv[])
     double force[N][3];
 
     read_data(mass, position, velocity, N, file_name);  //read initial pos and vel from file
-
 
 	DATA data[N];
 	NODE *root = NULL;
@@ -336,7 +324,7 @@ int main(int argc, char *argv[])
 		++n;
     }
 
-    for(i = 0; i < n_steps; i++)
+    for(i = 0; i < 1; i++)
     {
         /* build tree */
         build_tree(n, data, &root);
@@ -344,32 +332,35 @@ int main(int argc, char *argv[])
         /*calculate force on each particle*/
 
         for(j = 0; j < N; j++)
-            for(k = 0; k < 3; k++)
+            for(k = 0; k < DIM; k++)
                 force[j][k] = 0;   // set all forces to zero
 
         for(j = 0; j < N; j++) //loop over particles
         {
-            double force_j[3] = {0, 0, 0} ;  //force on particle j
-            DATA point = data[j];
-            add_to_force(point, root, force_j);
-            for(k = 0; k < 3; k++)
-                force[j][k] = force_j[k];
+            //double force_j[3] = {0, 0, 0} ;  //force on particle j
+            //DATA point = data[j];
+            add_to_force(&data[j], &root, &force[j]);
+            //for(k = 0; k < 3; k++)
+                //force[j][k] = force_j[k];
         }
 
         /* all done! */
         kill_node(root);
-
-        /*update position*/
-        if( strcmp(integrator,"RK4") == 0 )
-            integ_RK4(mass, position, velocity, force, N, t_step, epsilon);
-        else if ( strcmp(integrator, "LF2") == 0 )
-            integ_LF2(mass, position, velocity, force, N, t_step, epsilon);
-        else
-            return -1;
-
-        /*save current position*/
-        if(i % op_freq == 0)
-            save_data(mass, position, velocity, N, (int)(i/op_freq));
+        for(j = 0; j < N; j++)
+            for(k = 0; k < DIM; k++)
+                printf("%f  ", force[j][k]);
+//
+//        /*update position*/
+//        if( strcmp(integrator,"RK4") == 0 )
+//            integ_RK4(mass, position, velocity, force, N, t_step, epsilon);
+//        else if ( strcmp(integrator, "LF2") == 0 )
+//            integ_LF2(mass, position, velocity, force, N, t_step, epsilon);
+//        else
+//            return -1;
+//
+//        /*save current position*/
+//        if(i % op_freq == 0)
+//            save_data(mass, position, velocity, N, (int)(i/op_freq));
 
     }
 

@@ -3,43 +3,33 @@
 
 extern int DIM;  //number of dimensions
 
-void save_data(float mass[], float position[][DIM], float velocity[][DIM], int N, int file_num, const char *outputdir)
+void save_data(double mass[], double position[][DIM], double velocity[][DIM], int N, int file_num, char *outputdir)
 {
+    /*save data to outputdir
+    format: m x y z xdot ydot zdot*/
+
     //create data directory
     struct stat st = {0};
     if (stat(outputdir, &st) == -1) {
         mkdir(outputdir, 0700);
     }
-    /* if (stat("./data/", &st) == -1) { */
-    /*     mkdir("./data/", 0700); */
-    /* } */
-
-    /* char s_number[4]; */
-    /* sprintf(s_number, "%d", file_num);  //convert file_num to string */
 
     char filename[80];
     snprintf(filename, sizeof(filename), "%s/data_%04d.txt", outputdir, file_num);
-    
-    /* char sufix[40]; */
-    /* snprintf(sufix, sizeof(sufix), "/data_%04d.txt", file_num); */
-    /* strcpy(filename, outputdir); */
-    /* strcat(filename, sufix); */
-    /* snprintf(filename, sizeof(filename), "%s/data */
-    /* snprintf(filename, sizeof(filename), "./data/data_%04d.txt", file_num); */
 
     FILE *fp; //File to write positions to
     fp = fopen(filename, "w");
     if(fp == NULL)
 	exit(-1);
-    
+
     for(int i = 0; i < N; i++)
     {
         //format m x y z xdot ydot zdot
-        fprintf(fp, "%f ", mass[i]);
+        fprintf(fp, "%lf ", mass[i]);
         for(int k = 0; k < DIM; k++)
-            fprintf(fp, "%f ", position[i][k]);
+            fprintf(fp, "%lf ", position[i][k]);
         for(int k = 0; k < DIM; k++)
-            fprintf(fp, "%f ", velocity[i][k]);
+            fprintf(fp, "%lf ", velocity[i][k]);
         fprintf(fp, "\n");
     }
 
