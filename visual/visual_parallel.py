@@ -11,6 +11,8 @@ try:
     import configparser as cp
 except ImportError:
     import ConfigParser as cp
+from mpi4py import MPI
+from mpi4py.MPI import ANY_SOURCE
 
 
 class Parameters():
@@ -190,6 +192,22 @@ def main(dataPath):
         dtheta = 0
         ddistance = 0
 
+    ##### MPI stuff #####
+    comm = MPI.COMM_WORLD
+    rank = comm.Get_rank()
+    size = comm.Get_size()
+
+    workPerRank = int(np.ceil(N / size))
+
+    startID = workPerRank * rank
+    
+    p.phi += startID * dphi
+    p.theta += startID * dtheta
+    p.distance += startID * ddistance
+
+    endID = min(startID + workPerRank, N)
+    datafiles = datafiles[startID:endID]
+
     index = 0
     for fn in datafiles:
         _index = index if p.singleview else None
@@ -201,23 +219,7 @@ def main(dataPath):
         if p.singleview:
             index += 1
         # single_plot(fn, scale=scale, distance=distance)
-
-    ##### make a movie and save it into a folder ####
-    topDir, dataBasePath = os.path.split(os.path.abspath(dataPath))
-    movieDir = os.path.join(topDir, "movie")
-    if not os.path.isdir(movieDir):
-        os.system("mkdir {}".format(movieDir))
-    if p.singleview:
-        dataBasePath = dataBasePath[:-4]
-    movieName = "{}/{}.mp4".format(movieDir, dataBasePath)
-    if not p.singleview:
-        os.system("ffmpeg -i {}_fig/data_%04d.jpg -y -pix_fmt yuv420p {}".
-            format(dataPath, movieName))
-    else:
-        os.system("ffmpeg -i {}_fig/{}%04d.jpg -y -pix_fmt yuv420p {}".
-            format(topDir, dataBasePath, movieName))
-    print("\n{} saved\n".format(movieName))
-
+        
 
 if __name__ == "__main__":
 
@@ -227,5 +229,5 @@ if __name__ == "__main__":
     dPath = sys.argv[1]
     p = Parameters(sys.argv[2])
     
-    mlab.figure(size=[1280, 720], bgcolor=(0, 0, 0))
+    mlab.figure(size=[1960, 1080], bgcolor=(0, 0, 0))
     main(dPath)
