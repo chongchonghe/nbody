@@ -1,3 +1,15 @@
+/*********************************************************
+ASTR615 - HW#4 Problem #2
+Particle-Particle N-body code
+
+Authors: Mohammed Khalil and ChongChong He
+
+Date: 11/18/17
+
+Filename: main.c
+*********************************************************/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -19,14 +31,14 @@ int DIM = 3;  //number of dimensions
 
 int main(int argc, char *argv[])
 {
-    char *file_name = "3body.txt";;   //name of initial conditions file
+    char *file_name = "init_2body0.5.txt";;   //name of initial conditions file
     char *outputdir = "./data/";  // dir of output files
-    int N = 3;   //number of particles
+    int N = 2;   //number of particles
     double epsilon = 0.0;  //softening parameter
-    double t_step = 0.01;  //time step
-    int n_steps = 10000;   // number of steps
-    int op_freq = 10;    // output frequency
-    char *integrator = "LF2";  //ODE integration method
+    double t_step = 0.05;  //time step
+    int n_steps = 4836;   // number of steps
+    int op_freq = 4;    // output frequency
+    char *integrator = "RK4";  //ODE integration method
     int i; //loop variable
 
     if ((argc == 8) || (argc == 9)) {

@@ -41,6 +41,9 @@ energy = 0.5 * v1**2 + 0.5 * v2**2 - 1/r
 E0 = -0.5 * (1 + e)
 frac_energy = (energy - E0) / abs(E0)
 
+#create directory for plots
+if not os.path.exists('./plots_p1/'):
+    os.makedirs('./plots_p1/')
 
 #Orbit Plot
 plt.figure()
@@ -51,7 +54,7 @@ plt.ylabel('y', fontsize = 20)
 plt.xticks(fontsize=16)
 plt.yticks(fontsize=16)
 plt.title('Orbit diagram (x vs. y) for e = '+str(e)+' using '+method, fontsize = 20)
-plt.savefig('p1_plots/'+method+'_e'+str(e)+'_xy.png', dpi=400, bbox_inches='tight')
+plt.savefig('plots_p1/'+method+'_e'+str(e)+'_xy.png', dpi=400, bbox_inches='tight')
 plt.show()
 
 #phase plot 
@@ -62,7 +65,7 @@ plt.ylabel(r'Relative radial velocity $v_r$', fontsize = 20)
 plt.xticks(fontsize=16)
 plt.yticks(fontsize=16)
 plt.title(r'Phase diagram of $v_r$ vs r for e = '+str(e)+' using '+method, fontsize = 20)
-plt.savefig('p1_plots/'+method+'_e'+str(e)+'_rv.png', dpi=400, bbox_inches='tight')
+plt.savefig('plots_p1/'+method+'_e'+str(e)+'_rv.png', dpi=400, bbox_inches='tight')
 plt.show()
 
 #energy plot 
@@ -73,5 +76,5 @@ plt.ylabel('Fractional change in total energy', fontsize = 20)
 plt.xticks(fontsize=16)
 plt.yticks(fontsize=16)
 plt.title('Fractional change in energy vs t for e = '+str(e)+' using '+method, fontsize = 20, y=1.04)
-plt.savefig('p1_plots/'+method+'_e'+str(e)+'_energy.png', dpi=400, bbox_inches='tight')
+plt.savefig('plots_p1/'+method+'_e'+str(e)+'_energy.png', dpi=400, bbox_inches='tight')
 plt.show()
