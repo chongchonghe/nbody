@@ -1,9 +1,10 @@
 #ifndef read_data_h
 #define read_data_h
 
-extern int DIM;
+//extern int DIM;
+#include "definitions.h"
 
-void read_data(double mass[], double position[][DIM], double velocity[][DIM], int N, char *file_name)
+void read_data(int N, DATA *data, char *file_name)
 {
     /*read data from file_name
     format: m x y z xdot ydot zdot*/
@@ -17,11 +18,12 @@ void read_data(double mass[], double position[][DIM], double velocity[][DIM], in
     for(i = 0; i < N; i++)
     {
         //format: m x y z xdot ydot zdot
-        fscanf(fp, "%lf", &mass[i]);
+        data[i].idx = i;
+        fscanf(fp, "%lf", &data[i].mass);
         for(k = 0; k < DIM; k++)
-            fscanf(fp, "%lf", &position[i][k]);
+            fscanf(fp, "%lf", &data[i].pos[k]);
         for(k = 0; k < DIM; k++)
-            fscanf(fp, "%lf", &velocity[i][k]);
+            fscanf(fp, "%lf", &data[i].vel[k]);
     }
     fclose(fp);
 }

@@ -1,9 +1,9 @@
 #ifndef save_data_h
 #define save_data_h
 
-extern int DIM;  //number of dimensions
+#include "definitions.h"
 
-void save_data(double mass[], double position[][DIM], double velocity[][DIM], int N, int file_num, char *outputdir)
+void save_data(int N, const DATA *data, int file_num, char *outputdir)
 {
     /*save data to outputdir
     format: m x y z xdot ydot zdot*/
@@ -25,11 +25,11 @@ void save_data(double mass[], double position[][DIM], double velocity[][DIM], in
     for(int i = 0; i < N; i++)
     {
         //format m x y z xdot ydot zdot
-        fprintf(fp, "%lf ", mass[i]);
+        fprintf(fp, "%lf ", data[i].mass);
         for(int k = 0; k < DIM; k++)
-            fprintf(fp, "%lf ", position[i][k]);
+            fprintf(fp, "%lf ", data[i].pos[k]);
         for(int k = 0; k < DIM; k++)
-            fprintf(fp, "%lf ", velocity[i][k]);
+            fprintf(fp, "%lf ", data[i].vel[k]);
         fprintf(fp, "\n");
     }
 

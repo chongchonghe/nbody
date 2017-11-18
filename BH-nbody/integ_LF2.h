@@ -1,30 +1,30 @@
 #ifndef integ_LF2_h
 #define integ_LF2_h
 
-extern int DIM;  //number of dimensions
+#include "definitions.h"
 
-void integ_LF2(double mass[], double position[][DIM], double velocity[][DIM], double force[][DIM], int N, double step, double epsilon)
+void integ_LF2(int N, DATA *data, const NODE *root, double force[][DIM], double epsilon, double step)
 {
     /*update position and velocity using 2nd order leapfrog*/
 
     int i, k; //loop vars
 
-    //calculate position after half a step
-    double pos_12[N][DIM];
+    //advance position by half a step
     for(i = 0; i < N; i++)
         for(k = 0; k < DIM; k++)
-            pos_12[i][k] = position[i][k] + 0.5 * step * velocity[i][k];
+            data[i].pos[k] +=  0.5 * step * data[i].vel[k];
 
-    //force at pos_12
-    calc_force(mass, pos_12, force, N, epsilon);
+
+    //force after half a step
+    calc_force(N, data, root, force, epsilon);
 
     //update velocity and position
     for(i = 0; i < N; i++)
     {
         for(k = 0; k < DIM; k++)
         {
-            velocity[i][k] += step * force[i][k] / mass[i];
-            position[i][k] = pos_12[i][k] + 0.5 * step * velocity[i][k];
+            data[i].vel[k] += step * force[i][k] / data[i].mass;
+            data[i].pos[k] += 0.5 * step * data[i].vel[k];
         }
     }
 }
