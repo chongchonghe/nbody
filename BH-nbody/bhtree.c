@@ -233,7 +233,7 @@ void build_tree(int n, const DATA *data, NODE **root)
 	}
 
 
-void direct_force(const DATA *point, NODE *node, double *force)
+void direct_force(const DATA *point, const NODE *node, double *force)
 {
     printf("============== call direct force\n%f  ", point->mass);
     for(int k = 0; k < 3; k++)
@@ -252,13 +252,38 @@ void direct_force(const DATA *point, NODE *node, double *force)
     for(i = 0; i < DIM; i++)
         dist_sq += (point->pos[i] - node->cog[i]) * (point->pos[i] - node->cog[i]);
 
-    for(i = 0; i < DIM; i++){
-        ihat = (point->pos[i] - node->cog[i]) / sqrt(dist_sq);
-        force[i] -= point->mass * node->mass * ihat / (dist_sq + epsilon*epsilon);;
-    }
+    if (dist_sq != 0)
+        for(i = 0; i < DIM; i++){
+            ihat = (point->pos[i] - node->cog[i]) / sqrt(dist_sq);
+            force[i] -= point->mass * node->mass * ihat / (dist_sq + epsilon*epsilon);;
+        }
+}
+void direct_force2(const DATA *point, const DATA *leaf, double *force)
+{
+    printf("/////////////// call direct force2\n%f  ", point->mass);
+    for(int k = 0; k < 3; k++)
+        printf("%f  ", point->pos[k]);
+    printf("\n");
+    printf("%f  ", leaf->mass);
+    for(int k = 0; k < 3; k++)
+        printf("%f  ", leaf->pos[k]);
+    printf("\n");
+
+    int i;
+    double epsilon = 0;
+    double ihat;
+
+    double dist_sq = 0;
+    for(i = 0; i < DIM; i++)
+        dist_sq += (point->pos[i] - leaf->pos[i]) * (point->pos[i] - leaf->pos[i]);
+    if (dist_sq != 0)
+        for(i = 0; i < DIM; i++){
+            ihat = (point->pos[i] - leaf->pos[i]) / sqrt(dist_sq);
+            force[i] -= point->mass * leaf->mass * ihat / (dist_sq + epsilon*epsilon);;
+        }
 }
 
-int add_to_force(const DATA *point, NODE *node, double *force)
+int add_to_force(const DATA *point, const NODE *node, double *force)
 {
     printf("************ call add to force\n%f  ", point->mass);
     for(int k = 0; k < 3; k++)
@@ -269,7 +294,26 @@ int add_to_force(const DATA *point, NODE *node, double *force)
         printf("%f  ", node->cog[k]);
     printf("\n");
 
-    int i;
+    NODE *cell;
+    DATA *leaf;
+    for (int i = 0; i < CELLS_PER_NODE; i++){
+        //cell = node->cell[i];
+        //leaf = node->leaf[i];
+        if (node->cell[i] != NULL) {
+            printf("/////////cell %f  ", node->cell[i]->mass);
+            for(int k = 0; k < 3; k++)
+                printf("%f  ", node->cell[i]->cog[k]);
+            printf("\n");
+            }
+        if (node->leaf[i] != NULL) {
+            printf("/////////leaf %f  ", node->leaf[i]->mass);
+            for(int k = 0; k < 3; k++)
+                printf("%f  ", node->leaf[i]->pos[k]);
+            printf("\n");
+            }
+    }
+
+    int i,k;
     double cell_size, theta;
     double theta_crit = 0.6;
 
@@ -289,13 +333,25 @@ int add_to_force(const DATA *point, NODE *node, double *force)
         direct_force(point, node, force);
     else
         for (i = 0; i < CELLS_PER_NODE; i++)
-            if(node->cell[i])  //check if subcell is not empty
+            //if(node->cell[i])  //check if subcell is not empty
             {
                 if (node->cell[i] != NULL) //is cell a node?
                     add_to_force(point, node->cell[i], force);
-                else if (node->leaf[i] != NULL)  //is cell a leaf?
-                    direct_force(point, node->leaf[i], force);
+
+                else if (node->leaf[i] != NULL )  //is cell a leaf?
+                    direct_force2(point, node->leaf[i], force);
             }
+//    if (theta < theta_crit)
+//        direct_force(point, node, force);
+//    else
+//        for (i = 0; i < CELLS_PER_NODE; i++)
+//            //if(node->cell[i] || node->leaf[i])  //check if subcell is not empty
+//            {
+//                if (node->leaf[i] != NULL)  //is cell a leaf?
+//                    {direct_force2(point, node->leaf[i], force); break;}
+//                else if (node->cell[i] != NULL) //is cell a node?
+//                    add_to_force(point, node->cell[i], force);
+//            }
 
 }
 
@@ -336,7 +392,31 @@ int main(int argc, char *argv[])
     {
         /* build tree */
         build_tree(n, data, &root);
+        printf("Tree dimensions: (%g,%g,%g) to (%g,%g,%g)\n",
+		   root->cmin[0], root->cmin[1], root->cmin[2],
+		   root->cmax[0], root->cmax[1], root->cmax[2]);
+        printf("System total mass = %g\n", root->mass);
+        printf("System center of mass = (%g,%g,%g)\n",
+		   root->cog[0], root->cog[1], root->cog[2]);
 
+        //NODE *cell;
+        //DATA *leaf;
+        for (int i = 0; i < CELLS_PER_NODE; i++){
+            //cell = root->cell[i];
+            //leaf = root->leaf[i];
+            if (root->cell[i] != NULL) {
+                printf("/////////cell %f  ", root->cell[i]->mass);
+                for(int k = 0; k < 3; k++)
+                    printf("%f  ", root->cell[i]->cog[k]);
+                printf("\n");
+                }
+            if (root->leaf[i] != NULL) {
+                printf("/////////leaf %f  ", root->leaf[i]->mass);
+                for(int k = 0; k < 3; k++)
+                    printf("%f  ", root->leaf[i]->pos[k]);
+                printf("\n");
+                }
+        }
         /*calculate force on each particle*/
 
         for(j = 0; j < N; j++)
@@ -344,7 +424,7 @@ int main(int argc, char *argv[])
                 force[j][k] = 0;   // set all forces to zero
 
         for(j = 0; j < N; j++) //loop over particles
-            add_to_force(&data[j], root, &force[j]);
+            add_to_force(&data[j], root, force[j]);
 
         /* all done! */
         kill_node(root);
