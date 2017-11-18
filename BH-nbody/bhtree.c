@@ -235,6 +235,15 @@ void build_tree(int n, const DATA *data, NODE **root)
 
 void direct_force(const DATA *point, NODE *node, double *force)
 {
+    printf("============== call direct force\n%f  ", point->mass);
+    for(int k = 0; k < 3; k++)
+        printf("%f  ", point->pos[k]);
+    printf("\n");
+    printf("%f  ", node->mass);
+    for(int k = 0; k < 3; k++)
+        printf("%f  ", node->cog[k]);
+    printf("\n");
+
     int i;
     double epsilon = 0;
     double ihat;
@@ -249,11 +258,17 @@ void direct_force(const DATA *point, NODE *node, double *force)
     }
 }
 
-void add_to_force(const DATA *point, NODE *node, double *force)
+int add_to_force(const DATA *point, NODE *node, double *force)
 {
-    /* data[i].pos[0]: x position of particle i
-       point is DATA struct with pos[0,1,2] mass and idx
-       node is NODE struct with cmin, cmax, mass, pos, cog, cell, leaf*/
+    printf("************ call add to force\n%f  ", point->mass);
+    for(int k = 0; k < 3; k++)
+        printf("%f  ", point->pos[k]);
+    printf("\n");
+    printf("%f  ", node->mass);
+    for(int k = 0; k < 3; k++)
+        printf("%f  ", node->cog[k]);
+    printf("\n");
+
     int i;
     double cell_size, theta;
     double theta_crit = 0.6;
@@ -261,34 +276,27 @@ void add_to_force(const DATA *point, NODE *node, double *force)
     double dist_sq = 0;
     for(i = 0; i < DIM; i++)
         dist_sq += (point->pos[i] - node->cog[i]) * (point->pos[i] - node->cog[i]);
+    if(dist_sq == 0) return 0;
 
     cell_size = ((node->cmax[0] - node->cmin[0]) +
                  (node->cmax[1] - node->cmin[1]) +
                  (node->cmax[2] - node->cmin[2])) / 3;
 
-    for(i = 0; i < DIM; i++)
-        printf("%lf ", point->pos[i]);
-    printf("*****************\n");
-    for(i = 0; i < DIM; i++)
-        printf("%lf ", force[i]);
-    printf("*****************\n");
+    theta = cell_size / sqrt(dist_sq);
+    printf("theta = %f \n",theta);
 
-    if(dist_sq != 0){
-        theta = cell_size / sqrt(dist_sq);
-        printf("%f \n",theta);///////////////
-        if (theta < theta_crit)
-            direct_force(point, node, force);
-        else {
-            for (i = 0; i < CELLS_PER_NODE; i++) {
+    if (theta < theta_crit)
+        direct_force(point, node, force);
+    else
+        for (i = 0; i < CELLS_PER_NODE; i++)
+            if(node->cell[i])  //check if subcell is not empty
+            {
                 if (node->cell[i] != NULL) //is cell a node?
                     add_to_force(point, node->cell[i], force);
-                else if (node->leaf[i] != NULL) { //is cell a leaf?
+                else if (node->leaf[i] != NULL)  //is cell a leaf?
                     direct_force(point, node->leaf[i], force);
-                    //break; //why break?
-                }
             }
-        }
-    }
+
 }
 
 int main(int argc, char *argv[])
@@ -336,16 +344,12 @@ int main(int argc, char *argv[])
                 force[j][k] = 0;   // set all forces to zero
 
         for(j = 0; j < N; j++) //loop over particles
-        {
-            //double force_j[3] = {0, 0, 0} ;  //force on particle j
-            //DATA point = data[j];
-            add_to_force(&data[j], &root, &force[j]);
-            //for(k = 0; k < 3; k++)
-                //force[j][k] = force_j[k];
-        }
+            add_to_force(&data[j], root, &force[j]);
 
         /* all done! */
         kill_node(root);
+
+        printf("\nForce: ");
         for(j = 0; j < N; j++)
             for(k = 0; k < DIM; k++)
                 printf("%f  ", force[j][k]);
