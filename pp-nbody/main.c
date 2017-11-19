@@ -22,24 +22,50 @@
 
 int DIM = 3;  //number of dimensions
 
-//_Bool is_close_encounter(double rTypical, double m1, double m2, double position1[DIM], double position2[DIM],
-//                         double velocity1[DIM], double velocity2[DIM])
-//{
-//    // check distance < alpha * rTypical
-//    double alpha = 2.0;
-//    double dist = 0.0;
-//    for (int i = 0; i < DIM; i++)
-//        dist += (position1[i] - position2[i]) * (position1[i] - position2[i]);
-//    if (dist * dist > alpha * rTypical * rTypical)
-//        return 0;
-//
-//    // if close enough to each other, check T + V < 0
-//    double kinetic = 0.0;
-//    for (int i = 0; i < DIM; i++)
-//        kinetic += (velocity1[i] - velocity2[i]) * (velocity1[i] - velocity2[i]);
-//
-//
-//}
+double cal_potential(int N, DATA *data)
+{
+    double pot = 0.0;
+    double dis2;
+    for (int i = 0; i < N; i++) {
+        for (int j = i + 1; j < N; j++) {
+            dis2 = 0.0;
+            for (int k = 0; k < DIM; k++)
+                dis2 += pow((data[i].pos[k] - data[j].pos[k]), 2.0);
+            pot += - data[i].mass * data[j].mass / sqrt(dis2);
+        }
+    }
+    return pot;
+}
+
+double cal_kinetic(int N, DATA *data)
+{
+    double kin = 0.0;
+    for (int i = 0; i < N; i++)
+        for (int k = 0; k < DIM; k ++)
+            kin += data[i].mass * data[i].vel[k] * data[i].vel[k];
+    return kin / 2.0;
+}
+
+_Bool is_close_encounter(double dVirial, double mass[], double position[][DIM],
+                         double velocity[DIM])
+{
+    // check distance < alpha * dVirial
+    const double alpha = 5.0;
+    const double beta = 2.0;
+    double dist2 = 0.0;
+    
+    for (int i = 0; i < DIM; i++)
+        dist2 += (position1[i] - position2[i]) * (position1[i] - position2[i]);
+    if (dist2 > alpha * alpha * dVirial * dVirial)
+        return 0;
+
+    // if close enough to each other, check T + V < 0
+    double kinetic = 0.0;
+    for (int i = 0; i < DIM; i++)
+        kinetic += (velocity1[i] - velocity2[i]) * (velocity1[i] - velocity2[i]);
+    kinetic /= 2.0;
+    
+}
 
 //void check_binary(double mass[], double position[][DIM], double force[][DIM])
 //{
