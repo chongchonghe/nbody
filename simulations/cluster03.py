@@ -85,7 +85,8 @@ def main(N):
     data[:, 0] = mass
     data[:, 1:4] = space(N)
     data[:, 4:7] = set_vel(data, 0.8, 1)
-    np.savetxt("cluster03.txt", data)
+    #np.savetxt("cluster03.txt", data)
+    np.savetxt("cluster03_2000.txt", data)
     
     bins = np.logspace(np.log10(0.08), 2, 36)
     dlogm = np.log10(bins[1]) - np.log10(bins[0])
@@ -106,5 +107,5 @@ def main(N):
     plt.savefig('imf.eps')
 
 if __name__ == "__main__":
-    N = 1000
+    N = 2000
     main(N)

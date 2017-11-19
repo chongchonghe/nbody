@@ -62,6 +62,7 @@ int add_to_force(const DATA *point, const NODE *node, double *force, double epsi
                 add_to_force(point, node->cell[i], force, epsilon);
             else if (node->leaf[i] != NULL )  //is cell a leaf?
                 direct_force_leaf(point, node->leaf[i], force, epsilon);
+    return 0;
 }
 
 void calc_force(int N, const DATA *data, const NODE *root, double force[][DIM], double epsilon)
