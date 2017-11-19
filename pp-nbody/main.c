@@ -58,18 +58,6 @@ _Bool is_binary(double rTypical, double m1, double m2, double position1[DIM],
     return 0;
 }
 
-//void check_binary(double mass[], double position[][DIM], double force[][DIM])
-//{
-//    int i, j, k;
-//    for (i = 0; i < N; i++) {
-//        for (j = i + 1; j < N; j++) {
-//            if is_close_encounter {
-//
-//            }
-//        }
-//    }
-//}
-
 int main(int argc, char *argv[])
 {
     char *file_name = "cluster03.txt";   //name of initial conditions file
