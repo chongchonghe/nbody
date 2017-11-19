@@ -1,6 +1,13 @@
-// Change log:
-// Add check_binary, is_close_encounter
-// Add a print to file at the inital step
+/*********************************************************
+ASTR615 - HW#4 Problem #2
+Particle-Particle N-body code
+
+Authors: Mohammed Khalil and ChongChong He
+
+Date: 11/18/17
+
+Filename: main.c
+*********************************************************/
 
 
 #include <stdio.h>
@@ -65,12 +72,12 @@ _Bool is_binary(double rTypical, double m1, double m2, double position1[DIM],
 
 int main(int argc, char *argv[])
 {
-    char *file_name = "binary/test01.txt";;   //name of initial conditions file
-    char *outputdir = "binary/test01";  // dir of output files
-    int N = 2;   //number of particles
-    double epsilon = 0.001;  //softening parameter
-    double t_step = 0.1;  //time step
-    int n_steps = 20;   // number of steps
+    char *file_name = "cluster03.txt";   //name of initial conditions file
+    char *outputdir = "./data/";  // dir of output files
+    int N = 1000;   //number of particles
+    double epsilon = 0.01;  //softening parameter
+    double t_step = 0.01;  //time step
+    int n_steps = 100;   // number of steps
     int op_freq = 1;    // output frequency
     char *integrator = "LF2";  //ODE integration method
     int i, j; //loop variable
@@ -138,6 +145,9 @@ int main(int argc, char *argv[])
             integ_LF2(mass, position, velocity, force, N, t_step, epsilon);
         else
             return -1;
+
+        if(i % op_freq == 0)
+            save_data(mass, position, velocity, N, (int)(i/op_freq), outputdir);
     }
 
     return 0;

@@ -1,0 +1,28 @@
+ASTR615 - HW#4
+Group 4. ChongChong He and Mohammed Khalil
+
+==============================
+
+Problem 1
+
+main.c   takes input from the user 
+         run directly to use default parameters.
+         To change parameters, run using
+         ./main fname outputdir N epsilon t_step n_steps op_freq [integrator]\n"
+
+read_data.h   reads data from initial conditions file
+calc_force.h  calculates force on each particle
+integ_LF2.h   updates position and velocity using 2nd order leapfrog
+integ Rk4.h   updates position and velocity using 4th order Runge-Kutta
+save_data.h   saves data to output directory 
+
+p1_plots.py
+    reads the output files from the C file and produces the required plots 
+
+================================
+
+Problem 2
+
+We have not finished problem 2 yet.
+
+
