@@ -22,24 +22,34 @@
 
 int DIM = 3;  //number of dimensions
 
-//_Bool is_close_encounter(double rTypical, double m1, double m2, double position1[DIM], double position2[DIM],
-//                         double velocity1[DIM], double velocity2[DIM])
-//{
-//    // check distance < alpha * rTypical
-//    double alpha = 2.0;
-//    double dist = 0.0;
-//    for (int i = 0; i < DIM; i++)
-//        dist += (position1[i] - position2[i]) * (position1[i] - position2[i]);
-//    if (dist * dist > alpha * rTypical * rTypical)
-//        return 0;
-//
-//    // if close enough to each other, check T + V < 0
-//    double kinetic = 0.0;
-//    for (int i = 0; i < DIM; i++)
-//        kinetic += (velocity1[i] - velocity2[i]) * (velocity1[i] - velocity2[i]);
-//
-//
-//}
+_Bool is_binary(double rTypical, double m1, double m2, double position1[DIM],
+                         double position2[DIM], double velocity1[DIM], double velocity2[DIM])
+{
+    // check distance < alpha * rTypical
+    double alpha = 5.0;
+    double beta = 2.0;
+    double distSq = 0.0;
+    
+    for (int i = 0; i < DIM; i++)
+        distSq += (position1[i] - position2[i]) * (position1[i] - position2[i]);
+    if (distSq > alpha * alpha * rTypical * rTypical)
+        return 0;
+    
+    // if close enough to each other, check K / |W| < 1 - beta^-1
+    double reducedMass;
+    double relaVelSq = 0.0;
+    double kinetic;
+    double potentialAbs;
+    
+    for (int i = 0; i < DIM; i++)
+        relaVelSq += (velocity1[i] - velocity2[i]) * (velocity1[i] - velocity2[i]);
+    reducedMass = m1 * m2 / (m1 + m2);
+    kinetic = 0.5 * reducedMass * relaVelSq;
+    potentialAbs = m1 * m2 / sqrt(distSq);
+    if (kinetic / potentialAbs < 1.0 - 1.0 / beta)
+        return 1;
+    return 0;
+}
 
 //void check_binary(double mass[], double position[][DIM], double force[][DIM])
 //{
@@ -63,7 +73,7 @@ int main(int argc, char *argv[])
     int n_steps = 20;   // number of steps
     int op_freq = 1;    // output frequency
     char *integrator = "LF2";  //ODE integration method
-    int i; //loop variable
+    int i, j; //loop variable
 
     if ((argc == 8) || (argc == 9)) {
         //check user input
@@ -104,6 +114,7 @@ int main(int argc, char *argv[])
     double position[N][DIM];
     double velocity[N][DIM];
     double force[N][DIM];
+    double rTypical = 
 
     read_data(mass, position, velocity, N, file_name);  //read initial pos and vel from file
 
@@ -111,6 +122,13 @@ int main(int argc, char *argv[])
     {
         if(i % op_freq == 0)
             save_data(mass, position, velocity, N, (int)(i/op_freq), outputdir);
+        
+        // check binary
+        for (i = 0; i < N; i++) {
+            for (j = i + 1; j < N; j++) {
+                if (is_binary(rTypical, data[i].mass, data[j].mass, data[i].pos, data[j].pos, data[i].vel, data[j].vel))
+            }
+        }
 
         calc_force(mass, position, force, N, epsilon);
 
