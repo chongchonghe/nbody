@@ -18,20 +18,26 @@ import sys
 fig, ax = plt.subplots(2, figsize=[6, 12])
 #plt.show()
 
-if len(sys.argv) == 4:
+if len(sys.argv) >= 4:
     boxlen = np.double(sys.argv[3])
     xlim = [-boxlen, boxlen]
     ylim = [-boxlen, boxlen]
-elif len(sys.argv) == 7:
-    xlim = [np.double(sys.argv[3]), np.double(sys.argv[4])]
-    ylim = [np.double(sys.argv[5]), np.double(sys.argv[6])]
+if len(sys.argv) == 5:
+    startid = int(sys.argv[4])
 else:
-    raise SystemExit("usage: ./movie2d.py file pausetime [[boxlen], [xmin, xmax, ymin, ymax]]")
+    startid = 0
+
+#elif len(sys.argv) == 7:
+#    xlim = [np.double(sys.argv[3]), np.double(sys.argv[4])]
+#    ylim = [np.double(sys.argv[5]), np.double(sys.argv[6])]
+#else:
+#    raise SystemExit("usage: ./movie2d.py file pausetime [[boxlen], [xmin, xmax, ymin, ymax]]")
 
 pausetime = np.double(sys.argv[2])
 
 idx = 0
-for fn in sorted(glob.glob(sys.argv[1] + "/*")):
+files = sorted(glob.glob(sys.argv[1] + "/*"))[startid:]
+for fn in files:
     data = np.loadtxt(fn)
     x = data[:, 1]
     y = data[:, 2]
@@ -47,8 +53,8 @@ for fn in sorted(glob.glob(sys.argv[1] + "/*")):
 
     # plot distance of last two particles in log scale
     ax[1].set_yscale('log')
-    ax[1].set_ylim([1e-4, 10])
-    ax[1].set_xlim([0, 104])
+    ax[1].set_ylim([1e-3, 1e3])
+    ax[1].set_xlim([0, 404])
     ax[1].plot(idx, np.linalg.norm(data[-2, 1:4] - data[-1, 1:4]),'r.')
     idx += 1
     plt.pause(pausetime)

@@ -55,8 +55,8 @@ int DIM = 3;  //number of dimensions
 
 int main(int argc, char *argv[])
 {
-    char *file_name = "./test01.txt";;   //name of initial conditions file
-    char *outputdir = "./test01";  // dir of output files
+    char *file_name = "binary/test01.txt";;   //name of initial conditions file
+    char *outputdir = "binary/test01";  // dir of output files
     int N = 2;   //number of particles
     double epsilon = 0.001;  //softening parameter
     double t_step = 0.1;  //time step
