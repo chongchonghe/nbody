@@ -5,7 +5,7 @@ import os
 data_files = sorted([name for name in os.listdir('./data/')])
 
 n_points = len(data_files)
-e = 0.5
+e = 0.9
 period = np.pi * np.sqrt(2 / (1 + e)**3)
 method = 'LF2'
 
@@ -60,6 +60,7 @@ plt.show()
 #phase plot 
 plt.figure()
 plt.scatter(r,vr)
+plt.axis('equal')
 plt.xlabel('Separation r', fontsize = 20)
 plt.ylabel(r'Relative radial velocity $v_r$', fontsize = 20)
 plt.xticks(fontsize=16)

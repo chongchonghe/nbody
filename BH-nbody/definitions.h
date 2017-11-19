@@ -1,9 +1,6 @@
 #ifndef definitions_h
 #define definitions_h
 
-
-#define DIM 3  /*number of dimensions*/
-
 /* particle definitions */
 
 #define MAX_NUM_PART 5000
@@ -19,7 +16,9 @@ typedef struct {
 
 #define CELLS_PER_NODE 8 /* oct-tree (3-D) */
 
+#define THETA_CRIT 0.6 /*critical value for theta=cellsize/distance*/
 
+#define DIM 3  /*number of dimensions*/
 
 struct node_s {
   double cmin[3], cmax[3], pos[3];

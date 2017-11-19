@@ -14,6 +14,7 @@ void save_data(int N, const DATA *data, int file_num, char *outputdir)
         mkdir(outputdir, 0700);
     }
 
+    //format file name
     char filename[80];
     snprintf(filename, sizeof(filename), "%s/data_%04d.txt", outputdir, file_num);
 

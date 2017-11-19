@@ -20,13 +20,11 @@ void integ_LF2(int N, DATA *data, const NODE *root, double force[][DIM], double 
 
     //update velocity and position
     for(i = 0; i < N; i++)
-    {
         for(k = 0; k < DIM; k++)
         {
             data[i].vel[k] += step * force[i][k] / data[i].mass;
             data[i].pos[k] += 0.5 * step * data[i].vel[k];
         }
-    }
 }
 
 #endif

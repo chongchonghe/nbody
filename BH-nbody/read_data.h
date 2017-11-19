@@ -1,7 +1,6 @@
 #ifndef read_data_h
 #define read_data_h
 
-//extern int DIM;
 #include "definitions.h"
 
 void read_data(int N, DATA *data, char *file_name)

@@ -197,4 +197,4 @@ void build_tree(int n, const DATA *data, NODE **root)
 	}
 
 #endif
-/* bhtree.c */
+/* bhtree.h */
