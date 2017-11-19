@@ -165,7 +165,7 @@ def main(dataPath):
         else:
             datafiles = [dataPath] * p.totalframes
     elif os.path.isdir(dataPath):
-        datafiles = glob.glob(dataPath + "/*")
+        datafiles = sorted(glob.glob(dataPath + "/*"))
     else:
         print("file or directory {} not found".format(dataPath))
         return
