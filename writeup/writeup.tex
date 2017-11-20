@@ -7,9 +7,26 @@
 \date{\today}
 \maketitle
 
-\section*{Problem 2}
-We perform a simulation of a cluster with Kroupa IMF.
-\subsection*{Mass distribution}
+\section*{Problem 2: Simulations of Globular Clusters}
+We perform a series of simulations of globular clusters.
+\subsection*{Setups}
+
+\subsubsection*{Units and Time Scales}
+The units are: $ [T] = 2.5395 \times 10^{15}\,$s $\approx 80\,$Myr, 
+$ [L] = 3.08 \times 10^{18} \, $cm $ \approx 1 \, $pc, $ [M] = 6.7925 \times 10^{31} \, $g $ 
+\approx 0.03416 M_\odot $. In this setup the gravitational constant is unity. 
+
+Suppose a cluster of stars from the results of \textit{RAMSES} simulation which has $ \sim 
+$ 1000 stars with Salpeter IMF in a box of length $ L = 50 $. If this stellar system is 
+virialized, $ \sigma^2 = M_{\rm tot} / R $, from which we obtain $ \sigma \approx 
+27 $. Here I use a mean mass of 0.638 $ M_\odot $ = 20 (code unit) from Salpeter IMF and 
+$ R = 25 $. 
+Then, the crossing time of dispersion velocity is $ t_{\sigma} = L / \sigma \approx 2 $.
+If we choose a step size $ \Delta t  = t_\sigma / 50 = 0.04 $, i.e. 50 steps in a course time, 
+then with 5000 steps we are able to simulate 100 course time, which is equal to 16 Gyr. 
+This can be done with a PP n-body code on my laptop.
+
+\subsubsection*{Mass distribution}
 We implement in all of our simulations the Kroupa IMF:
 \begin{equation}
 \phi(m) \propto 
@@ -27,19 +44,70 @@ m=
 	\cfrac{0.166558}{(1.00024\, -x)^{10/13}} & (0.760707<x<1)
 	\end{cases}
 \end{equation}
+where $ x $ is uniform random numbers between 0 and 1.
 
-\subsection*{Initial setup}
-The cluster is a specially uniformly distributed sphere with a radius of 1. The inital 
+\subsubsection*{Spacial and velocity distribution}
+The cluster is a specially uniformly distributed sphere with a radius of 1. The initial 
 velocities are from a  Gaussian distribution with a dispersion correspondent to a virial ratio 
 of $ \alpha \sim 0.4 $. A virial ratio $ \alpha < 0.5 $ implies the system is bounded. The 
 velocity dispersion crossing time is $ t \approx 0.08 $, so we use a step size of 0.001, i.e. 
-80 steps per course time.
+80 steps per crossing time.
 
-\subsection{Video}
-The video of this specific setup is \textit{simulations/cluster03.mp4}.
-
+\subsection*{Results}
 %../pp-nbody/a.out cluster03.txt cluster03 1000 0.01 0.001 200 1
+The video of this specific setup is \textit{simulations/cluster03.mp4}.
+\subsubsection{Energy conservation and step sizes}
 
+
+
+\subsection*{Binary Problem}
+I am trying to conquer the problem of close encounters in our simulation.
+The basic idea is to check if two stars 1) are close enough to each other and 2) $ K + V < 0 
+$, every $ n $ steps. If yes, we just replace these two stars with one star at the center 
+of mass. Binaries may further merge into trinaries, and so on so forth.
+
+
+\subsubsection*{Realization of the Binary Problem}
+If two stars both with velocity $ \sigma $ are in virial equilibrium, i.e. $ \alpha = K/|W| = 0.5 
+$, the separation between them would be $ d_{\rm virial} = m /2 \sigma^2 = 0.016 $. 
+However, the typical displacement of a particle in one step is $ d_{\rm step} = \sigma \Delta 
+t \approx 1 $, much greater than $ d_{\rm virial} $. Therefore our simulation is not able to 
+identify binary stars. We need a step size $ \sim $1000 times smaller to achieve the 
+resolution of binary systems.
+
+\subsubsection*{Searching for close encounters}
+We consider two stars in the center-of-mass frame. We defined the following two 
+parameters:
+\begin{itemize}
+	\item The \textit{close-encounter parameter} $ \alpha $ or $ \gamma $ which defines the 
+	criteria of being close enough to each other:
+	\begin{equation}\label{eq:r12}
+	| \v{r}_1 - \v{r}_2 | < d_{\rm close} = \alpha \cdot d_{\rm virial} = \gamma \cdot d_{\rm step}.
+	\end{equation}
+%	where $ \alpha $ is a parameter to be determined.
+	\item The \textit{escape parameter} $ \beta $ which confines the particles in a small 
+	region:
+	\begin{equation}\label{key}
+	\frac{K}{|W|} < 1 - \beta^{-1}.
+	\end{equation}
+	This relation gives the largest separation between the two particles at any time, 
+	\begin{equation}
+	d_{\rm max} = \beta d_{\rm close},
+	\end{equation}
+	ignoring interactions with other particles
+	\footnote{This relation is obtained by solving  equation $ (1 - \beta^{-1}) |V_0| + V_0 = 0 
+	+ V_1 $ and $ V_0 \propto 1/d_0 $,	$ V_1 \propto 1/d_{\rm max} $.}.
+	When $ d_{\rm max} \ll d_{\rm step} $ the two particles may be considered as a 
+	binary.
+\end{itemize}
+
+The solution to the binary problem then becomes balancing the typical particle 
+separation $ d_{\rm sepa} = L/\sqrt[3]{N} $, the one-step displacement $ d_{\rm 
+step} = \sigma \Delta t $, the close-encounter parameter $ \alpha $ or $ \gamma $, and 
+the escape parameter $ \beta $.
+
+With $ d_{\rm sepa} \sim 5 $, we set $ \Delta t = 0.04 $, $ \alpha = 5 $ and $ \beta = 2 $, 
+which imply $ d_{\rm step} = 1 $, $ d_{\rm close} = 0.08 $, and $ d_{\rm max} = 0.16 $.
 
 %\subsection*{Morphology}
 %We use disk galaxies in our simulation. Each disk galaxy has two components: a 
@@ -50,7 +118,7 @@ The video of this specific setup is \textit{simulations/cluster03.mp4}.
 %	x = 1 - (1 + \frac{r}{r_{\rm H}}) \, e^{-\frac{r}{r_{\rm H}}}
 %\end{equation}
 %where $ x $ is a uniform random number between 0 and 1.
-%
+
 %\subsection*{Disk Rotation}
 %We use a uniform angular velocity $ \omega $.
 
