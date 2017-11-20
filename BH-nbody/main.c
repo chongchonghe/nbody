@@ -28,6 +28,34 @@ Filename: main.c
 #include "integ_RK4.h"
 #include "save_data.h"
 
+_Bool is_binary(double rTypical, double m1, double m2, double position1[DIM],
+                double position2[DIM], double velocity1[DIM], double velocity2[DIM])
+{
+    // check distance < alpha * rTypical
+    double alpha = 5.0;
+    double beta = 2.0;
+    double distSq = 0.0;
+    
+    for (int i = 0; i < DIM; i++)
+        distSq += (position1[i] - position2[i]) * (position1[i] - position2[i]);
+    if (distSq > alpha * alpha * rTypical * rTypical)
+        return 0;
+    
+    // if close enough to each other, check K / |W| < 1 - beta^-1
+    double reducedMass;
+    double relaVelSq = 0.0;
+    double kinetic;
+    double potentialAbs;
+    
+    for (int i = 0; i < DIM; i++)
+        relaVelSq += (velocity1[i] - velocity2[i]) * (velocity1[i] - velocity2[i]);
+    reducedMass = m1 * m2 / (m1 + m2);
+    kinetic = 0.5 * reducedMass * relaVelSq;
+    potentialAbs = m1 * m2 / sqrt(distSq);
+    if (kinetic / potentialAbs < 1.0 - 1.0 / beta)
+        return 1;
+    return 0;
+}
 
 int main(int argc, char *argv[])
 {
@@ -78,11 +106,20 @@ int main(int argc, char *argv[])
     double force[N][DIM]; //force felt by each particle
 	DATA data[N];   //mass, position, and vel data
 	NODE *root;  //stores BH tree
+    
+    double rTypical = 
 
 	read_data(N, data, file_name);  //read data from initial conditions file
 
     for(i = 0; i < n_steps; i++)
     {
+        // check binarity
+        for (i = 0; i < N; i++) {
+            for (j = i + 1; j < N; j++) {
+                if (is_binary(rTypical, data[i].mass, data[j].mass, data[i].pos, data[j].pos, data[i].vel, data[j].vel))
+                    }
+        }
+        
         /* build tree */
         root = NULL;
         build_tree(N, data, &root);
