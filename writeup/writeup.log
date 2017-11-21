@@ -1,14 +1,12 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  16 NOV 2017 13:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500) (preloaded format=pdflatex 2017.11.21)  21 NOV 2017 12:02
 entering extended mode
- restricted \write18 enabled.
- %&-line parsing enabled.
-**writeup.tex
-(./writeup.tex
+**./writeup.tex
+(writeup.tex
 LaTeX2e <2017-04-15>
-Babel <3.10> and hyphenation patterns for 84 language(s) loaded.
-(./header.tex (/usr/local/texlive/2017/texmf-dist/tex/latex/base/article.cls
+Babel <3.15> and hyphenation patterns for 1 language(s) loaded.
+(header.tex (/home/mohammed/.miktex/texmfs/install/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/local/texlive/2017/texmf-dist/tex/latex/base/size12.clo
+(/home/mohammed/.miktex/texmfs/install/tex/latex/base/size12.clo
 File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -23,27 +21,27 @@ File: size12.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(/usr/local/texlive/2017/texmf-dist/tex/latex/setspace/setspace.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/setspace/setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
 )
-(/usr/local/texlive/2017/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2016/11/05 v2.16a AMS math features
+(/home/mohammed/.miktex/texmfs/install/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2017/09/02 v2.17a AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
-(/usr/local/texlive/2017/texmf-dist/tex/latex/amsmath/amstext.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01 AMS text
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/amsmath/amsgen.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks14
 \ex@=\dimen103
 ))
-(/usr/local/texlive/2017/texmf-dist/tex/latex/amsmath/amsbsy.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen104
 )
-(/usr/local/texlive/2017/texmf-dist/tex/latex/amsmath/amsopn.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
 \inf@bad=\count87
@@ -84,30 +82,30 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 LaTeX Info: Redefining \[ on input line 2817.
 LaTeX Info: Redefining \] on input line 2818.
 )
-(/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-(/usr/local/texlive/2017/texmf-dist/tex/latex/units/units.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/units/units.sty
 Package: units 1998/08/04 v0.9b Typesetting units
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/base/ifthen.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-(/usr/local/texlive/2017/texmf-dist/tex/latex/units/nicefrac.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/units/nicefrac.sty
 Package: nicefrac 1998/08/04 v0.9b Nice fractions
 \L@UnitsRaiseDisplaystyle=\skip46
 \L@UnitsRaiseTextstyle=\skip47
 \L@UnitsRaiseScriptstyle=\skip48
 ))
-(/usr/local/texlive/2017/texmf-dist/tex/latex/listings/listings.sty
-(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics/keyval.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/listings/listings.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks19
 )
@@ -124,25 +122,24 @@ Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \lst@lineno=\count104
 \lst@maxwidth=\dimen115
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/listings/lstmisc.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 \c@lstnumber=\count105
 \lst@skipnumbers=\count106
 \lst@framebox=\box29
 )
-(/usr/local/texlive/2017/texmf-dist/tex/latex/listings/listings.cfg
+(/home/mohammed/.miktex/texmfs/install/tex/latex/listings/listings.cfg
 File: listings.cfg 2015/06/04 1.6 listings configuration
 ))
 Package: listings 2015/06/04 1.6 (Carsten Heinz)
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2017/03/14 v6.85a Hypertext links for LaTeX
 
-(/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+(/home/mohammed/.miktex/texmfs/install/tex/generic/oberdiek/hobsub-hyperref.sty
 Package: hobsub-hyperref 2016/05/16 v1.14 Bundle oberdiek, subset hyperref (HO)
 
-
-(/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+(/home/mohammed/.miktex/texmfs/install/tex/generic/oberdiek/hobsub-generic.sty
 Package: hobsub-generic 2016/05/16 v1.14 Bundle oberdiek, subset generic (HO)
 Package: hobsub 2016/05/16 v1.14 Construct package bundles (HO)
 Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
@@ -181,26 +178,25 @@ Package atveryend Info: \enddocument detected (standard20110627).
 Package: atbegshi 2016/06/09 v1.18 At begin shipout hook (HO)
 Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
 Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
-)
-(/usr/local/texlive/2017/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+) (/home/mohammed/.miktex/texmfs/install/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-(/usr/local/texlive/2017/texmf-dist/tex/latex/oberdiek/auxhook.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/oberdiek/auxhook.sty
 Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
 )
-(/usr/local/texlive/2017/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 )
 \@linkdim=\dimen116
 \Hy@linkcounter=\count107
 \Hy@pagecounter=\count108
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/pd1enc.def
+(/home/mohammed/.miktex/texmfs/install/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2017/03/14 v6.85a Hyperref: PDFDocEncoding definition (HO)
 )
 \Hy@SavedSpaceFactor=\count109
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+(/home/mohammed/.miktex/texmfs/install/tex/latex/00miktex/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
 Package hyperref Info: Hyper figures OFF on input line 4498.
@@ -212,7 +208,7 @@ Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4751.
 \c@Hy@tempcnt=\count110
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/url/url.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/url/url.sty
 \Urlmuskip=\muskip11
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
@@ -237,49 +233,48 @@ LaTeX Info: Redefining \pageref on input line 6432.
 
 Package hyperref Message: Driver (autodetected): hpdftex.
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/home/mohammed/.miktex/texmfs/install/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2017/03/14 v6.85a Hyperref driver for pdfTeX
 \Fld@listcount=\count115
 \c@bookmark@seq@number=\count116
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
 \Hy@SectionHShift=\skip49
 )
-(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+(/home/mohammed/.miktex/texmfs/install/tex/latex/graphics/graphicx.sty
+Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2017/04/14 v1.1b Standard LaTeX Graphics (DPC,SPQR)
+(/home/mohammed/.miktex/texmfs/install/tex/latex/graphics/graphics.sty
+Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics/trig.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+(/home/mohammed/.miktex/texmfs/install/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/graphics-def/pdftex.def
-File: pdftex.def 2017/01/12 v0.06k Graphics/color for pdfTeX
-\Gread@gobject=\count117
+(/home/mohammed/.miktex/texmfs/install/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2017/06/24 v1.0g Graphics/color driver for pdftex
 ))
 \Gin@req@height=\dimen120
 \Gin@req@width=\dimen121
 )
-(/usr/local/texlive/2017/texmf-dist/tex/latex/tools/multicol.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/tools/multicol.sty
 Package: multicol 2017/04/11 v1.8q multicolumn formatting (FMi)
-\c@tracingmulticols=\count118
+\c@tracingmulticols=\count117
 \mult@box=\box30
 \multicol@leftmargin=\dimen122
-\c@unbalance=\count119
-\c@collectmore=\count120
-\doublecol@number=\count121
-\multicoltolerance=\count122
-\multicolpretolerance=\count123
+\c@unbalance=\count118
+\c@collectmore=\count119
+\doublecol@number=\count120
+\multicoltolerance=\count121
+\multicolpretolerance=\count122
 \full@width=\dimen123
 \page@free=\dimen124
 \premulticols=\dimen125
@@ -310,20 +305,20 @@ Package: multicol 2017/04/11 v1.8q multicolumn formatting (FMi)
 \@tempa=\box51
 \@tempa=\box52
 \@tempa=\box53
-\c@columnbadness=\count124
-\c@finalcolumnbadness=\count125
+\c@columnbadness=\count123
+\c@finalcolumnbadness=\count124
 \last@try=\dimen128
 \multicolovershoot=\dimen129
 \multicolundershoot=\dimen130
 \mult@nat@firstbox=\box54
 \colbreak@box=\box55
-\mc@col@check@num=\count126
+\mc@col@check@num=\count125
 )
-(/usr/local/texlive/2017/texmf-dist/tex/latex/geometry/geometry.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/geometry-de/geometry.sty
 Package: geometry 2010/09/12 v5.6 Page Geometry
-\Gm@cnth=\count127
-\Gm@cntv=\count128
-\c@Gm@tempcnt=\count129
+\Gm@cnth=\count126
+\Gm@cntv=\count127
+\c@Gm@tempcnt=\count128
 \Gm@bindingoffset=\dimen131
 \Gm@wd@mp=\dimen132
 \Gm@odd@mp=\dimen133
@@ -333,23 +328,32 @@ Package: geometry 2010/09/12 v5.6 Page Geometry
 \Gm@layouthoffset=\dimen137
 \Gm@layoutvoffset=\dimen138
 \Gm@dimlist=\toks21
-)
-(/usr/local/texlive/2017/texmf-dist/tex/latex/natbib/natbib.sty
+
+(/home/mohammed/.miktex/texmfs/install/tex/latex/geometry/geometry.cfg))
+(/home/mohammed/.miktex/texmfs/install/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip52
 \bibsep=\skip53
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count130
+\c@NAT@ctr=\count129
+)
+(/home/mohammed/.miktex/texmfs/install/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count130
+\float@exts=\toks22
+\float@box=\box56
+\@float@everytoks=\toks23
+\@floatcapt=\box57
 )
 \c@prop=\count131
 \c@thm=\count132
 \c@dfn=\count133
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/scalerel/scalerel.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/scalerel/scalerel.sty
 Package: scalerel 2016/12/29 v1.8 Routines for constrained scaling and stretchi
 ng of objects, relative to a reference object or in absolute terms
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/tools/calc.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/tools/calc.sty
 Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count134
 \calc@Bcount=\count135
@@ -362,7 +366,7 @@ LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count136
 \calc@Cskip=\skip56
 )
-(/usr/local/texlive/2017/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2017/01/02 v2.4 e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count137
 )
@@ -374,7 +378,7 @@ Package: etoolbox 2017/01/02 v2.4 e-TeX tools for LaTeX (JAW)
 \LMex=\skip62
 \LMpt=\skip63
 ))
-(./writeup.aux)
+(writeup.aux)
 \openout1 = `writeup.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
@@ -392,13 +396,13 @@ LaTeX Font Info:    ... okay on input line 3.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
 \c@lstlisting=\count138
-\AtBeginShipoutBox=\box56
+\AtBeginShipoutBox=\box58
 Package hyperref Info: Link coloring OFF on input line 3.
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
-(/usr/local/texlive/2017/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+(/home/mohammed/.miktex/texmfs/install/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count139
@@ -406,42 +410,37 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 3.
 LaTeX Info: Redefining \pageref on input line 3.
 LaTeX Info: Redefining \nameref on input line 3.
-
-(./writeup.out) (./writeup.out)
+ (writeup.out) (writeup.out)
 \@outlinefile=\write3
 \openout3 = `writeup.out'.
 
 
-(/usr/local/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(/home/mohammed/.miktex/texmfs/install/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count140
 \scratchdimen=\dimen141
-\scratchbox=\box57
+\scratchbox=\box59
 \nofMPsegments=\count141
 \nofMParguments=\count142
-\everyMPshowfont=\toks22
+\everyMPshowfont=\toks24
 \MPscratchCnt=\count143
 \MPscratchDim=\dimen142
 \MPnumerator=\count144
 \makeMPintoPDFobject=\count145
-\everyMPtoPDFconversion=\toks23
-) (/usr/local/texlive/2017/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+\everyMPtoPDFconversion=\toks25
+) (/home/mohammed/.miktex/texmfs/install/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
-(/usr/local/texlive/2017/texmf-dist/tex/latex/oberdiek/grfext.sty
+(/home/mohammed/.miktex/texmfs/install/tex/latex/oberdiek/grfext.sty
 Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
 )
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 38.
 Package grfext Info: Graphics extension search list:
-(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+(grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
-
-(/usr/local/texlive/2017/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
-))
+)
 *geometry* detected driver: dvips
 *geometry* verbose mode - [ preamble ] result:
 * driver: dvips
@@ -475,57 +474,148 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 14.
-(/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 14.
-
-(/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 76.
- [1
+<plots_p1/LF2_e05_xy.png, id=11, 542.56703pt x 425.48962pt>
+File: plots_p1/LF2_e05_xy.png Graphic file (type png)
+<use plots_p1/LF2_e05_xy.png>
+Package pdftex.def Info: plots_p1/LF2_e05_xy.png  used on input line 18. on inp
+ut line 18.
+Package pdftex.def Info: Requested size: 242.82503pt x 190.42328pt on input lin
+e 18.
+<plots_p1/RK4_e05_xy.png, id=13, 542.56703pt x 425.48962pt>
+File: plots_p1/RK4_e05_xy.png Graphic file (type png)
+<use plots_p1/RK4_e05_xy.png>
+Package pdftex.def Info: plots_p1/RK4_e05_xy.png  used on input line 23. on inp
+ut line 23.
+Package pdftex.def Info: Requested size: 242.82503pt x 190.42328pt on input lin
+e 23.
+<plots_p1/LF2_e05_rv.png, id=14, 535.34003pt x 425.85097pt>
+File: plots_p1/LF2_e05_rv.png Graphic file (type png)
+<use plots_p1/LF2_e05_rv.png>
+Package pdftex.def Info: plots_p1/LF2_e05_rv.png  used on input line 30. on inp
+ut line 30.
+Package pdftex.def Info: Requested size: 242.82503pt x 193.16467pt on input lin
+e 30.
+<plots_p1/RK4_e05_rv.png, id=15, 538.05016pt x 425.85097pt>
+File: plots_p1/RK4_e05_rv.png Graphic file (type png)
+<use plots_p1/RK4_e05_rv.png>
+Package pdftex.def Info: plots_p1/RK4_e05_rv.png  used on input line 35. on inp
+ut line 35.
+Package pdftex.def Info: Requested size: 242.82503pt x 192.18349pt on input lin
+e 35.
+<plots_p1/LF2_e05_energy.png, id=16, 596.76953pt x 439.4016pt>
+File: plots_p1/LF2_e05_energy.png Graphic file (type png)
+<use plots_p1/LF2_e05_energy.png>
+Package pdftex.def Info: plots_p1/LF2_e05_energy.png  used on input line 42. on
+ input line 42.
+Package pdftex.def Info: Requested size: 242.82503pt x 178.78806pt on input lin
+e 42.
+<plots_p1/RK4_e05_energy.png, id=17, 588.63914pt x 439.4016pt>
+File: plots_p1/RK4_e05_energy.png Graphic file (type png)
+<use plots_p1/RK4_e05_energy.png>
+Package pdftex.def Info: plots_p1/RK4_e05_energy.png  used on input line 47. on
+ input line 47.
+Package pdftex.def Info: Requested size: 242.82503pt x 181.26208pt on input lin
+e 47.
+[1
 Non-PDF special ignored!
 
-{/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 76.
- (./writeup.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 76.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 76.
+{/home/mohammed/.miktex/texmfs/data/pdftex/config/pdftex.map} <./plots_p1/LF2_e
+05_xy.png> <./plots_p1/RK4_e05_xy.png> <./plots_p1/LF2_e05_rv.png> <./plots_p1/
+RK4_e05_rv.png>]
+<plots_p1/LF2_e09_xy.png, id=30, 542.56703pt x 425.48962pt>
+File: plots_p1/LF2_e09_xy.png Graphic file (type png)
+<use plots_p1/LF2_e09_xy.png>
+Package pdftex.def Info: plots_p1/LF2_e09_xy.png  used on input line 58. on inp
+ut line 58.
+Package pdftex.def Info: Requested size: 242.82503pt x 190.42328pt on input lin
+e 58.
+<plots_p1/RK4_e09_xy.png, id=31, 552.8655pt x 425.48962pt>
+File: plots_p1/RK4_e09_xy.png Graphic file (type png)
+<use plots_p1/RK4_e09_xy.png>
+Package pdftex.def Info: plots_p1/RK4_e09_xy.png  used on input line 63. on inp
+ut line 63.
+Package pdftex.def Info: Requested size: 242.82503pt x 186.8784pt on input line
+ 63.
+<plots_p1/LF2_e09_rv.png, id=32, 519.98265pt x 425.85097pt>
+File: plots_p1/LF2_e09_rv.png Graphic file (type png)
+<use plots_p1/LF2_e09_rv.png>
+Package pdftex.def Info: plots_p1/LF2_e09_rv.png  used on input line 70. on inp
+ut line 70.
+Package pdftex.def Info: Requested size: 242.82503pt x 198.86987pt on input lin
+e 70.
+<plots_p1/RK4_e09_rv.png, id=33, 522.69278pt x 425.85097pt>
+File: plots_p1/RK4_e09_rv.png Graphic file (type png)
+<use plots_p1/RK4_e09_rv.png>
+Package pdftex.def Info: plots_p1/RK4_e09_rv.png  used on input line 75. on inp
+ut line 75.
+Package pdftex.def Info: Requested size: 242.82503pt x 197.8367pt on input line
+ 75.
+<plots_p1/LF2_e09_energy.png, id=34, 586.47105pt x 439.4016pt>
+File: plots_p1/LF2_e09_energy.png Graphic file (type png)
+<use plots_p1/LF2_e09_energy.png>
+Package pdftex.def Info: plots_p1/LF2_e09_energy.png  used on input line 82. on
+ input line 82.
+Package pdftex.def Info: Requested size: 242.82503pt x 181.92586pt on input lin
+e 82.
+<plots_p1/RK4_e09_energy.png, id=35, 578.52135pt x 439.4016pt>
+File: plots_p1/RK4_e09_energy.png Graphic file (type png)
+<use plots_p1/RK4_e09_energy.png>
+Package pdftex.def Info: plots_p1/RK4_e09_energy.png  used on input line 87. on
+ input line 87.
+Package pdftex.def Info: Requested size: 242.82503pt x 184.42671pt on input lin
+e 87.
+ [2 <./plots_p1/LF2_e05_energy.png> <./plots_p1/RK4_e05_energy.png> <./plots_p1
+/LF2_e09_xy.png> <./plots_p1/RK4_e09_xy.png> <./plots_p1/LF2_e09_rv.png> <./plo
+ts_p1/RK4_e09_rv.png>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 95.
 
+(/home/mohammed/.miktex/texmfs/install/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 95.
+LaTeX Font Info:    Try loading font information for U+msa on input line 109.
 
-Package rerunfilecheck Warning: File `writeup.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+(/home/mohammed/.miktex/texmfs/install/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 109.
 
-Package rerunfilecheck Info: Checksums for `writeup.out':
-(rerunfilecheck)             Before: E089CE70D31E0818B5EE4F744AAD96F0;53
-(rerunfilecheck)             After:  60499E2AFBC0079E0BDB748F6C434E66;45.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 76.
+(/home/mohammed/.miktex/texmfs/install/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [3 <./plots_p1/LF2_e09_energy.png> <./plots_p1/RK4_e09_energy.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 171.
+ [4]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 171.
+ (writeup.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 171.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 171.
+Package rerunfilecheck Info: File `writeup.out' has not changed.
+(rerunfilecheck)             Checksum: 173293A5254A43372AEF5AECFBAC725B;98.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 171.
  ) 
 Here is how much of TeX's memory you used:
- 8581 strings out of 492995
- 122123 string characters out of 6132704
- 226012 words of memory out of 5000000
- 12031 multiletter control sequences out of 15000+600000
- 9843 words of font info for 37 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 30i,13n,32p,969b,324s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
-</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
-/usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
-sr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
-/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/lo
-cal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local
-/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/
-texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/te
-xlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on writeup.pdf (1 page, 97637 bytes).
+ 8669 strings out of 495212
+ 124553 string characters out of 3181183
+ 219989 words of memory out of 3000000
+ 11840 multiletter control sequences out of 15000+200000
+ 10150 words of font info for 38 fonts, out of 3000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 30i,13n,32p,971b,326s stack positions out of 5000i,500n,10000p,200000b,50000s
+</home/mohammed/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmbx12.
+pfb></home/mohammed/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmex1
+0.pfb></home/mohammed/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmm
+i12.pfb></home/mohammed/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/c
+mmi8.pfb></home/mohammed/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm/
+cmr12.pfb></home/mohammed/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm
+/cmr6.pfb></home/mohammed/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm
+/cmr8.pfb></home/mohammed/.miktex/texmfs/install/fonts/type1/public/amsfonts/cm
+/cmsy10.pfb></home/mohammed/.miktex/texmfs/install/fonts/type1/public/amsfonts/
+cm/cmsy8.pfb></home/mohammed/.miktex/texmfs/install/fonts/type1/public/amsfonts
+/cm/cmti12.pfb>
+Output written on writeup.pdf (4 pages, 4417388 bytes).
 PDF statistics:
- 65 PDF objects out of 1000 (max. 8388607)
- 51 compressed objects within 1 object stream
- 8 named destinations out of 1000 (max. 500000)
- 9 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 108 PDF objects out of 1000 (max. 8388607)
+ 15 named destinations out of 1000 (max. 500000)
+ 77 words of extra memory for PDF output out of 10000 (max. 10000000)
 
