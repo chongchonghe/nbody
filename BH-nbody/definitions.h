@@ -16,7 +16,7 @@ typedef struct {
 
 #define CELLS_PER_NODE 8 /* oct-tree (3-D) */
 
-#define THETA_CRIT 0.6 /*critical value for theta=cellsize/distance*/
+#define THETA_CRIT 0.1 /*critical value for theta=cellsize/distance*/
 
 #define DIM 3  /*number of dimensions*/
 

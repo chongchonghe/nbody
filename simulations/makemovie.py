@@ -12,23 +12,12 @@ import os
 
 def make_movie(dataPath):
 
-    # ##### make a movie and save it into a folder ####
-    # message = np.ones(size)
-    
-    # if rank == 0:
-    #     comm.Recv(message, ANY_SOURCE)
-    # else:
-    #     comm.Send(message, 0)
-
     topDir, dataBasePath = os.path.split(os.path.abspath(dataPath))
     movieDir = os.path.join(topDir, "movie")
     if not os.path.isdir(movieDir):
         os.system("mkdir {}".format(movieDir))
-    # if p.singleview:
-    #     dataBasePath = dataBasePath[:-4]
     movieName = "{}/{}.mp4".format(movieDir, dataBasePath)
-    # if not p.singleview:
-    os.system("ffmpeg -i {}_fig/data_%04d.jpg -y -pix_fmt yuv420p {}".
+    os.system("ffmpeg -i {}/data_%04d.jpg -y -pix_fmt yuv420p {}".
         format(dataPath, movieName))
     # else:
     #     os.system("ffmpeg -i {}_fig/{}%04d.jpg -y -pix_fmt yuv420p {}".

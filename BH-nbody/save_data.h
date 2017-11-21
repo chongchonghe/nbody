@@ -3,7 +3,7 @@
 
 #include "definitions.h"
 
-void save_data(int N, const DATA *data, int file_num, char *outputdir)
+void save_data(int N, const DATA *data, int file_num, char *outputdir, int *binarity)
 {
     /*save data to outputdir
     format: m x y z xdot ydot zdot*/
@@ -31,6 +31,7 @@ void save_data(int N, const DATA *data, int file_num, char *outputdir)
             fprintf(fp, "%lf ", data[i].pos[k]);
         for(int k = 0; k < DIM; k++)
             fprintf(fp, "%lf ", data[i].vel[k]);
+        fprintf(fp, "%d", binarity[i]);
         fprintf(fp, "\n");
     }
 

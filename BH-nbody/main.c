@@ -51,15 +51,19 @@ int main(int argc, char *argv[])
     // Usage: ./main fname outputdir N epsilon t_step n_steps op_freq [integrator]
 
     /*default parameters*/
-    char *file_name = "binary/test03.txt";   //name of initial conditions file
-    char *outputdir = "binary/test03/";  // dir of output files
+    char *file_name = "binary/test.txt";   //name of initial conditions file
+    char *outputdir = "binary/test3/";  // dir of output files
     int N = 3;   //number of particles
-    double epsilon = 1e-6;  //softening parameter
-    double t_step = 0.001;  //time step
+    double epsilon = 2e-5;  //softening parameter
+    double t_step = 0.01;  //time step
     int n_steps = 100;   // number of steps
     int op_freq = 1;    // output frequency
     int integrator = 1;  //ODE integration method, 1: LF2, 2: RK4
-    int i,j,k; //loop variables
+    int i; //loop variables
+    int binarity[N];
+    
+    for (i = 0; i < N; i++)
+        binarity[i] = 1;
 
 	/*check user input*/
     if ((argc == 8) || (argc == 9)) {
@@ -100,7 +104,8 @@ int main(int argc, char *argv[])
 	DATA data[N];   //mass, position, and vel data
 	NODE *root;  //stores BH tree
     
-    double dClose = 0.0001; // TODO
+    double dClose = 0.2 * 2; // TODO
+    double mTwo;
 
 	read_data(N, data, file_name);  //read data from initial conditions file
 
@@ -108,17 +113,36 @@ int main(int argc, char *argv[])
     
     for(i = 0; i < n_steps; i++)
     {
+        
         // check binarity
-//        for (i = 0; i < N; i++)
-//        {
-//            for (j = i + 1; j < N; j++)
-//            {
-//                if (is_binary(dClose, data[i].mass, data[j].mass, data[i].pos, data[j].pos, data[i].vel, data[j].vel))
-//                {
-//
-//                }
-//            }
-//        }
+        for (int ii = 0; ii < N; ii++)
+        {
+            for (int jj = ii + 1; jj < N; jj++)
+            {
+                if (is_binary(dClose, data[ii].mass, data[jj].mass, data[ii].pos, data[jj].pos, data[ii].vel, data[jj].vel) && (binarity[ii] != 0) && (binarity[jj] != 0))
+                {
+                    mTwo = data[ii].mass + data[jj].mass;
+                    for (int k = 0; k < DIM; k++)
+                    {
+                        data[ii].pos[k] = (data[ii].mass * data[ii].pos[k] + data[jj].mass * data[jj].pos[k]) / mTwo;
+                        data[ii].vel[k] = (data[ii].mass * data[ii].vel[k] + data[jj].mass * data[jj].vel [k]) / mTwo;
+                    }
+                    data[ii].mass = mTwo;
+                    data[jj].mass = 1e-8;
+                    binarity[ii]++;
+                    binarity[jj] = 0;
+                }
+                //                        printf("binary found? Yes. %d and %d\n", ii, jj);
+                //                    else
+                //                        printf("binary found? No\n");
+            }
+        }
+        
+        /*save current position*/
+        if(i % op_freq == 0)
+        {
+            save_data(N, data, (int)(i/op_freq), outputdir, binarity);
+        }
         
         /* build tree */
         root = NULL;
@@ -136,10 +160,6 @@ int main(int argc, char *argv[])
         else
             return -1;
 
-        /*save current position*/
-        if(i % op_freq == 0)
-            save_data(N, data, (int)(i/op_freq), outputdir);
-
         /*free memory*/
         kill_node(root);
     }
@@ -148,4 +168,3 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
-
