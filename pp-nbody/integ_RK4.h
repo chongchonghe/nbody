@@ -1,3 +1,9 @@
+/*******************
+Mohammed Khalil and ChongChong He
+
+integ Rk4.h   updates position and velocity using 4th order Runge-Kutta
+********************/
+
 #ifndef integ_RK4_h
 #define integ_RK4_h
 

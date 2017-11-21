@@ -1,3 +1,9 @@
+/*************************
+Mohammed Khalil and ChongChong He
+
+read_data.h   reads data from initial conditions file
+**************************/
+
 #ifndef read_data_h
 #define read_data_h
 
