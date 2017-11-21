@@ -165,7 +165,7 @@ def main(dataPath):
         else:
             datafiles = [dataPath] * p.totalframes
     elif os.path.isdir(dataPath):
-        datafiles = glob.glob(dataPath + "/*")
+        datafiles = sorted(glob.glob(dataPath + "/*"))
     else:
         print("file or directory {} not found".format(dataPath))
         return
@@ -229,5 +229,5 @@ if __name__ == "__main__":
     dPath = sys.argv[1]
     p = Parameters(sys.argv[2])
     
-    mlab.figure(size=[1960, 1080], bgcolor=(0, 0, 0))
+    mlab.figure(size=[800, 800], bgcolor=(0, 0, 0))
     main(dPath)

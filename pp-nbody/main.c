@@ -85,6 +85,9 @@ int main(int argc, char *argv[])
 
     for(i = 0; i < n_steps; i++)
     {
+        if(i % op_freq == 0)
+            save_data(mass, position, velocity, N, (int)(i/op_freq), outputdir);
+
         calc_force(mass, position, force, N, epsilon);
 
         if( strcmp(integrator,"RK4") == 0 )
@@ -93,9 +96,6 @@ int main(int argc, char *argv[])
             integ_LF2(mass, position, velocity, force, N, t_step, epsilon);
         else
             return -1;
-
-        if(i % op_freq == 0)
-            save_data(mass, position, velocity, N, (int)(i/op_freq), outputdir);
     }
 
     return 0;

@@ -98,7 +98,7 @@ def main(N):
     data[:, 1:4] = space(N)
     data[:, 4:7] = set_vel(data, 0.8, 1)
     #np.savetxt("cluster03.txt", data)
-    np.savetxt("cluster03_2000.txt", data)
+    np.savetxt("cluster03_1000.txt", data)
     
     # plot a histogram of the samples
     bins = np.logspace(np.log10(0.08), 2, 36)
@@ -117,8 +117,8 @@ def main(N):
     plt.xlabel(r"$m/M_\odot$")
     plt.ylabel(r"$\frac{dN}{d\log(m/M_\odot)}$")
     plt.tight_layout()
-    plt.savefig('imf.eps')
+    plt.savefig('imf.pdf')
 
 
 if __name__ == "__main__":
-    main(2000)
+    main(1000)

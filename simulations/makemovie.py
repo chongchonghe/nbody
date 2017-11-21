@@ -17,12 +17,13 @@ def make_movie(dataPath):
     if not os.path.isdir(movieDir):
         os.system("mkdir {}".format(movieDir))
     movieName = "{}/{}.mp4".format(movieDir, dataBasePath)
-    os.system("ffmpeg -i {}/data_%04d.jpg -y -pix_fmt yuv420p {}".
+    output = os.system("ffmpeg -i {}/data_%04d.jpg -y -pix_fmt yuv420p {}".
         format(dataPath, movieName))
     # else:
     #     os.system("ffmpeg -i {}_fig/{}%04d.jpg -y -pix_fmt yuv420p {}".
     #         format(topDir, dataBasePath, movieName))
-    print("\n{} saved\n".format(movieName))
+    if output == 0:
+        print("\n{} saved\n".format(movieName))
 
 
 if __name__ == "__main__":

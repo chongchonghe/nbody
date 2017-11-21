@@ -26,7 +26,7 @@ void calc_force(double mass[], double position[][DIM], double force[][DIM], int 
             //calculate force between i and j
             for(k = 0; k < DIM; k++)
             {
-                khat = (position[i][k] - position[j][k]) / sqrt(dist_sq);
+                khat = (position[i][k] - position[j][k]) / sqrt(dist_sq + epsilon * epsilon);
                 fij = -mass[i] * mass[j] * khat / (dist_sq + epsilon*epsilon);
                 force[i][k] += fij;
                 force[j][k] -= fij;

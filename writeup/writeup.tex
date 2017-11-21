@@ -13,9 +13,7 @@ We perform a series of simulations of globular clusters.
 
 \subsection*{Stellar Cluster}
 %\subsubsection*{Setups}
-We did a few simulations with made-up initial conditions as well as initial conditions taken 
-from a snapshot of a simulation from \textit{RAMSES-RT}, an AMR MHD code with 
-radiative transfer.
+We did a few simulations of stellar clusters with made-up initial conditions 
 
 \subsubsection*{Mass distribution}
 We implement in all of our simulations the Kroupa IMF:
@@ -31,13 +29,13 @@ after doing transformation we get
 m=
 	\begin{cases}
 	-\cfrac{0.566179}{\sqrt[3]{1.7987\, - x} \left(x^3-5.39611 
-	x^2+9.70599 x-5.81939\right)} & (0<x<0.760707)\\
+	x^2+9.70599 x-5.81939\right)} & (0<x<0.760707) \\
 	\cfrac{0.166558}{(1.00024\, -x)^{10/13}} & (0.760707<x<1)
 	\end{cases}
 \end{equation}
-where $ x $ is uniform random numbers between 0 and 1. Figure \ref{fig:imf} shows the 
+where $ x $ is a random number between 0 and 1. Figure \ref{fig:imf} shows the 
 histogram of the masses of the generated particles as compared to the analytical line.
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=.6\columnwidth]{../simulations/imf.pdf}
 	\caption{The mass distribution of the particles in our simulation compared to analytical 
@@ -49,14 +47,30 @@ histogram of the masses of the generated particles as compared to the analytical
 The cluster is a specially uniformly distributed sphere with a radius of 1. The initial 
 velocities are from a  Gaussian distribution with a dispersion correspondent to a virial ratio 
 of $ \alpha \sim 0.4 $. A virial ratio $ \alpha < 0.5 $ implies the system is bounded. The 
-velocity dispersion crossing time is $ t \approx 0.08 $, so we use a step size of 0.001, i.e. 
-80 steps per crossing time.
+velocity dispersion in one axis is $ \sigma_x = 11.4 $ and the crossing time is $ t \approx 
+0.08 $, so we use a step size of 0.0005, i.e. 160 steps per crossing time.
+
+\subsubsection*{Softening parameter and step size}
+However, the binary radius is $ \sim 10^{-3} $ and the period is of order $ 10^{-4} $, so our 
+resolution it is far away from resolving binary particles. In order to avoid binaries, we use 
+a large softening parameter $ \epsilon = 0.005 $. We also do a control job with $ \epsilon 
+= 10^{-5} $ to compare with (Figure \ref{fig:energy01}).
+\begin{figure}
+	\centering
+	\includegraphics[width=0.6\columnwidth]{imagefile}
+\end{figure}
 
 \subsubsection*{Results}
+We run this simulation with both our PP-nbody code and BH-nbody code. 
 %../pp-nbody/a.out cluster03.txt cluster03 1000 0.01 0.001 200 1
 The video of this specific setup is \textit{simulations/cluster03.mp4}.
 
 \subsubsection*{Energy conservation and step sizes}
+
+\subsection{RAMSES}
+as well as initial conditions taken 
+from a snapshot of a simulation from \textit{RAMSES-RT}, an AMR MHD code with 
+radiative transfer.
 
 \subsubsection*{Units and Time Scales}
 The units in our simulation are as follow: $ [T] = 2.5395 \times 10^{15}\,$s $\approx 
