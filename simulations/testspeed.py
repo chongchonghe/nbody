@@ -1,3 +1,12 @@
+"""
+testspeed.py
+
+A python script to run the n-body simulations and count the time it takes to run
+
+Author: ChongChong He
+"""
+
+from __future__ import print_function
 import os
 import time
 

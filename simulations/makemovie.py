@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
+makemovie.py
+
+A script to use ffmpeg to make a movie from a folder containing all the figures
 
 @author: chongchonghe
 """
@@ -29,7 +32,7 @@ def make_movie(dataPath):
 if __name__ == "__main__":
 
     if len(sys.argv) < 2:
-        raise SystemExit("usage: python makemovie.py dataPath")
+        raise SystemExit("usage: python makemovie.py path/to/data")
 
     dPath = sys.argv[1]
     make_movie(dPath)

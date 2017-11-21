@@ -10,7 +10,7 @@ Group 4 : ChongChong He and Mohammed Khalil
 
 ASTR615 HW #4: Simulation and Visualization of N-body Problem using particle-particle method and Barnes-Hut tree method
 
-### Problem 1
+## Problem 1
 
 The directory pp-nbody contains the particle-particle code.
 The directory BH-nbody contains the Barnes-Hut code.
@@ -63,11 +63,9 @@ Plots will be saved to the directory ./plots_p1
 - save_data.h   saves data to output directory 
 
 
-###############################################################
+## Problem 2
 
-# Problem 2
-
-#### Files
+### Files
 
 Files are in the folder *simulation*. 
 
@@ -91,7 +89,7 @@ in paramters.ini
 run each job.
 
 
-#### How to run
+### How to run
 
 An example: to run the simulation of the cluster with pp-nbody code with 
 epsilon = 0.01, h = 0.001, num of steps = 200, and an output for every 

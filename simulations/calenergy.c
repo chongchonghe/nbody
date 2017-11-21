@@ -1,5 +1,6 @@
 /*
-  readenergy.c -- Calculate the kinetic and potential energy of all particles from a data file
+  calenergy.c -- Calculate the kinetic and potential energy of all particles from a data file
+  Author: ChongChong He
 */
 
 #include <stdio.h>
@@ -39,5 +40,6 @@ int main(int argc, char *argv[])
 	printf("%lf\n", w + k);
 	printf("Virial ratio:\n");
 	printf("%lf\n", -k / w);
+
 	return 0;
     }

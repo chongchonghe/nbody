@@ -1,3 +1,14 @@
+"""
+mayavi_paralle.py
+
+A parallel code using mayavi to visualize outputs from N-body simulations
+
+usage: 
+mpirun -np 4 python mayavi_paralle.py path/to/data parameters.ini
+
+Author: ChongChong He
+"""
+
 from __future__ import division, print_function
 import sys
 import os
