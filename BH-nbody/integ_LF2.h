@@ -1,3 +1,9 @@
+/*************************
+Mohammed Khalil and ChongChong He
+
+integ_LF2.h   updates position and velocity using 2nd order leapfrog
+**************************/
+
 #ifndef integ_LF2_h
 #define integ_LF2_h
 

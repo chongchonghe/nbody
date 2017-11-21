@@ -1,3 +1,8 @@
+/*************************
+Mohammed Khalil and ChongChong He
+
+force.h       performs tree walk and calculates force on each particle
+**************************/
 #ifndef force_h
 #define force_h
 

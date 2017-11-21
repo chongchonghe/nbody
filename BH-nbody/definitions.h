@@ -1,3 +1,10 @@
+/*************************
+Mohammed Khalil and ChongChong He
+
+definitions.h contains structure and constant definitions
+
+Based on structure definitions by Derek C. Richardson
+**************************/
 #ifndef definitions_h
 #define definitions_h
 

@@ -1,3 +1,14 @@
+'''
+ASTR615 - HW#4
+Plot problem 1 figures using the output of the C code from the directory ./data
+
+Authors: Mohammed Khalil and ChongChong He
+
+Date: 11/18/17
+
+Filename: p1_plots.py
+'''
+
 import matplotlib.pyplot as plt
 import numpy as np
 import os

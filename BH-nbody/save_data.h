@@ -1,3 +1,9 @@
+/*************************
+Mohammed Khalil and ChongChong He
+
+save_data.h   saves data to output directory
+**************************/
+
 #ifndef save_data_h
 #define save_data_h
 

@@ -62,6 +62,8 @@ Plots will be saved to the directory ./plots_p1
 
 - save_data.h   saves data to output directory 
 
+Files in directory pp-nbody with the same name do similar functions, but use different data structures.
+
 
 ## Problem 2
 

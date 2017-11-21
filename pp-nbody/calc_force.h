@@ -1,3 +1,8 @@
+/*******************
+Mohammed Khalil and ChongChong He
+
+calc_force.h calculates force on each particle using particle-particle method
+********************/
 #ifndef calc_force_h
 #define calc_force_h
 
