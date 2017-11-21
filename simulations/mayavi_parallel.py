@@ -224,7 +224,7 @@ def main(dataPath):
 if __name__ == "__main__":
 
     if len(sys.argv) < 3:
-        raise SystemExit("usage: python visual.py data.txt parameters.ini")
+        raise SystemExit("usage: python visual.py path/to/data parameters.ini")
 
     dPath = sys.argv[1]
     p = Parameters(sys.argv[2])
