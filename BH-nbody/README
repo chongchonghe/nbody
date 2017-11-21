@@ -1,0 +1,35 @@
+ASTR615 - HW#4
+Group 4. ChongChong He and Mohammed Khalil
+==============================
+
+N-body code using Barnes & Hut method
+
+main.c   takes input from the user and runs the simulation 
+
+TO RUN:
+./main fname outputdir N epsilon t_step n_steps op_freq [integrator]
+
+e.g. Run directly to use the default parameters
+./main 2body0.5.txt ./data 2 0 0.05 4836 4 LF2 
+
+for 2 bodies with e = 0.9
+./main 2body0.9.txt ./data 2 0 0.003 56547 50 RK4 
+
+definitions.h contains structure and constant definitions
+read_data.h   reads data from initial conditions file
+bhtree.h      builds Barnes-Hut tree
+force.h       calculates force on each particle
+integ_LF2.h   updates position and velocity using 2nd order leapfrog
+integ Rk4.h   updates position and velocity using 4th order Runge-Kutta
+save_data.h   saves data to output directory 
+
+p1_plots.py
+    reads the output files from the directory './data' and produces the orbit, phase, and energy plots 
+
+================================
+
+Problem 2
+
+run using the file cluster03.txt
+
+

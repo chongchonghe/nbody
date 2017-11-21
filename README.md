@@ -25,4 +25,4 @@ visual_parallel.py runs in parallel and make plots of all the outputs in a given
 ## TODO
 1. Plot of space diagram (x vs. y) needs to have scale. Ues ax.axis('equal')
 2. Check with Derek about direct force formula: r/|r| * 1/(r+epsilon)^2 or r / (r+epsilon)^(3/2).
-3. 
+3. Clean unnecessary comment, `*~` files

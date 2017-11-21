@@ -1,5 +1,6 @@
 \input{header.tex}
 \usepackage{graphicx}
+\usepackage{subcaption}
 
 \begin{document}
 
@@ -53,30 +54,59 @@ velocity dispersion in one axis is $ \sigma_x = 11.4 $ and the crossing time is 
 \subsubsection*{Softening parameter and step size}
 However, the binary radius is $ \sim 10^{-3} $ and the period is of order $ 10^{-4} $, so our 
 resolution it is far away from resolving binary particles. In order to avoid binaries, we use 
-a large softening parameter $ \epsilon = 0.005 $. We also do a control job with $ \epsilon 
-= 10^{-5} $ to compare with (Figure \ref{fig:energy01}).
+a large softening parameter $ \epsilon = 0.005 $. We also do a control run with $ \epsilon 
+= 10^{-5} $ to be compared with (Figure \ref{fig:energy}).
+
+\subsubsection*{Results: Energy and Time Consumption}
+The total number of particles in our simulation is 1000. We run this simulation with both 
+our PP-nbody code and BH-nbody code. The energy curve through 400 steps is shown in 
+Figure \ref{fig:energy}. When the softening parameter is too small, the energy of the 
+system increases dramatically due to close encounters being threw away with large step 
+sizes. 
+
+As for PP-nbody vs. BH-nbody, in our simulations of 1000 particles, BH code has nearly 
+no advantage. With a step size 0.0005 and softening parameter 0.005, when running for 
+400 steps, i.e. 2 - 3 dynamic time, PP code conserves energy better then BH code, even 
+with a small critical angle, and the BH code is not effective faster.
+It takes 21.0 seconds for the PP code to run the simulation, 15.0 seconds for the BH code 
+with theta = 0.6, and 31.8 seconds for the BH code with theta = 0.3.
+%PP-nbody, time elapsed: 21.007760047912598
+%BH-nbody, time elapsed: 15.026080846786499
+%BH-nbody, time elapsed: 31.776031970977783
+The videos are shown in \textit{simulations/} as \textit{cluster\_rotating\_camera.mp4} and 
+\textit{cluster\_static\_camera.mp4}.
 \begin{figure}
-	\centering
-	\includegraphics[width=0.6\columnwidth]{imagefile}
+		\centering
+	\begin{subfigure}[b]{0.48\textwidth}
+		\includegraphics[width=\columnwidth]{../simulations/energy_compare_epsilon}
+		\label{fig:energycompareepsilon}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.48\textwidth}
+		\includegraphics[width=\columnwidth]{../simulations/energy_compare_PP_BH}
+		\label{fig:energycompareppbh}
+	\end{subfigure}
+	\caption{Energy curve of the systems in our simulations of stellar clusters. All 
+	simulations use the same initial conditions but different softening parameters (left) 
+	and different methods of force calculation, i.e PP vs BH-tree (right). Epsilon is the 
+	softening parameter and theta is the critical angle in BH-tree. In the simulations shown 
+	in the right panel, epsilon = 0.005.}
+	\label{fig:energy}
 \end{figure}
 
-\subsubsection*{Results}
-We run this simulation with both our PP-nbody code and BH-nbody code. 
-%../pp-nbody/a.out cluster03.txt cluster03 1000 0.01 0.001 200 1
-The video of this specific setup is \textit{simulations/cluster03.mp4}.
+%\subsubsection*{Energy conservation and step sizes}
 
-\subsubsection*{Energy conservation and step sizes}
-
-\subsection{RAMSES}
-as well as initial conditions taken 
-from a snapshot of a simulation from \textit{RAMSES-RT}, an AMR MHD code with 
-radiative transfer.
+%\subsection*{Binary Problem}
+\subsection*{RAMSES-RT}
+We also use initial conditions taken from a snapshot of a simulation from 
+\textit{RAMSES-RT}, an AMR MHD code with radiative transfer. A total of 820 particles are 
+formed from a cold molecular cloud. This work is not shown in the directory due to limited 
+time, but I use the units and time scales in this simulation to investigate into binary 
+problem. 
 
 \subsubsection*{Units and Time Scales}
-The units in our simulation are as follow: $ [T] = 2.5395 \times 10^{15}\,$s $\approx 
-80\,$Myr, 
-$ [L] = 3.08 \times 10^{18} \, $cm $ \approx 1 \, $pc, $ [M] = 6.7925 \times 10^{31} \, $g $ 
-\approx 0.03416 M_\odot $. In this setup the gravitational constant is unity. 
+The units in this simulation are as follow: $ [T] = 2.5395 \times 10^{15}\,$s $\approx 
+80\,$Myr, $ [L] = 3.08 \times 10^{18} \, $cm $ \approx 1 \, $pc, $ [M] = 6.7925 \times 
+10^{31} \, $g $ \approx 0.03416 M_\odot $. In this setup the gravitational constant is unity. 
 
 Imaging a cluster of stars from the outputs of \textit{RAMSES} simulation which has $ \sim 
 $ 1000 stars with Kroupa IMF located in a box of length $ L = 50 $. If this system is 
@@ -86,19 +116,18 @@ $ R = 25 $.
 Then, the crossing time of dispersion velocity is $ t_{\sigma} = L / \sigma \approx 2 $.
 If we choose a step size $ \Delta t  = t_\sigma / 50 = 0.04 $, i.e. 50 steps in a crossing time, 
 then with 5000 steps we are able to simulate 100 crossing time, which is equal to 16 Gyr. 
-This can be done with a PP n-body code on my laptop, and it will be even faster with our 
+This can be done with a PP n-body code on my laptop, and it could be even faster with our 
 BH-tree n-body code.
 
 \subsection*{Binary Problem}
-I have a try on the problem of binarity in our simulation.
+I have an attempt on solving the problem of binarity in stellar cluster simulation.
 The basic idea is to check if two particles 1) are close enough to each other, and 2) $ K + V 
-< 0 $, every $ n $ steps. If yes, we just replace these two particles with one star 
+< 0 $ every $ n $ steps. If yes, we just replace these two particles with one star 
 representing the motion of the center of mass. Binaries may further merge into trinaries 
 and so on.
 
-
 \subsubsection*{Realization of the Binary Problem}
-If two stars both with velocity $ \sigma $ are in virial equilibrium, i.e. $ \alpha = K/|W| = 0.5 
+If two stars with velocities $ \sigma $ are in virial equilibrium, i.e. $ \alpha = K/|W| = 0.5 
 $, the separation between them would be $ d_{\rm virial} = m /2 \sigma^2 = 0.016 $. 
 However, the typical displacement of a particle in one step is $ d_{\rm step} = \sigma \Delta 
 t \approx 1 $, much greater than $ d_{\rm virial} $. Therefore our simulation is not able to 
@@ -131,17 +160,19 @@ parameters:
 	binary.
 \end{itemize}
 
-The solution to the binary problem then becomes balancing the typical particle 
-separation $ d_{\rm sepa} = L/\sqrt[3]{N} $, the one-step displacement $ d_{\rm 
+The solution to binary problem then becomes the balancing between typical particle 
+separation $ d_{\rm sepa} = L/\sqrt[3]{N} $, one-step displacement $ d_{\rm 
 step} = \sigma \Delta t $, the close-encounter parameter $ \alpha $ or $ \gamma $, and 
 the escape parameter $ \beta $.
 
+\subsection*{Results}
+To test our code, we artificially create a three-body system and show that a binary system 
+will appear when the step size is small enough. However, it will not be resolved with large 
+step 
+sizes.
+
 With $ d_{\rm sepa} \sim 5 $, we set $ \Delta t = 0.04 $, $ \alpha = 5 $ and $ \beta = 2 $, 
 which imply $ d_{\rm step} = 1 $, $ d_{\rm close} = 0.08 $, and $ d_{\rm max} = 0.16 $.
-
-\subsection*{Results}
-We artificially create a binary system and show that the binary is resolved with small step 
-sizes but not resolved with large step sizes.
 
 \begin{figure}
 	\centering

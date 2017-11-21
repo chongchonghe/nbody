@@ -21,5 +21,8 @@
 # proper stepsize but small epsilon
 #../pp-nbody/main cluster03.txt cluster03_small_epsilon 1000 0.00001 0.0005 400 1
 
-# proper stepsize and epsilon, BH-nbody
-../BH-nbody/main cluster03.txt cluster03_BH 1000 0.005 0.0005 4 1
+# proper stepsize and epsilon, BH-nbody, theta_critical = 0.6
+../BH-nbody/main cluster03.txt cluster03_BH 1000 0.005 0.0005 400 1
+
+# proper stepsize and epsilon, BH-nbody, theta_critical = 0.2
+../BH-nbody/main_theta2 cluster03.txt cluster03_BH_theta2 1000 0.005 0.0005 400 1
