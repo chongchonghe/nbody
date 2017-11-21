@@ -5,9 +5,104 @@
 \begin{document}
 
 \title{ASTR615 HW\#4}
-\author{Group 4: ChongChong He \& }
+\author{Group 4: ChongChong He \& Mohammed Khalil\\}
 \date{\today}
 \maketitle
+
+
+\section{Problem 1}
+
+\subsubsection*{2nd order leapfrog vs. 4th order Runge-Kutta for e = 0.5}
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}[b]{0.48\linewidth}
+		\includegraphics[width=\linewidth]{plots_p1/LF2_e05_xy.png}
+		%\caption{\label{fig:lightstd}.}
+	\end{minipage}
+	%\quad
+	\begin{minipage}[b]{0.48\linewidth}
+		\includegraphics[width=\linewidth]{plots_p1/RK4_e05_xy.png}
+	\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}[b]{0.48\linewidth}
+		\includegraphics[width=\linewidth]{plots_p1/LF2_e05_rv.png}
+		%\caption{\label{fig:lightstd}.}
+	\end{minipage}
+	%\quad
+	\begin{minipage}[b]{0.48\linewidth}
+		\includegraphics[width=\linewidth]{plots_p1/RK4_e05_rv.png}
+	\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}[b]{0.48\linewidth}
+		\includegraphics[width=\linewidth]{plots_p1/LF2_e05_energy.png}
+		%\caption{\label{fig:lightstd}.}
+	\end{minipage}
+	%\quad
+	\begin{minipage}[b]{0.48\linewidth}
+		\includegraphics[width=\linewidth]{plots_p1/RK4_e05_energy.png}
+	\end{minipage}
+\end{figure}
+
+
+
+\subsubsection*{2nd order leapfrog vs. 4th order Runge-Kutta for e = 0.9}
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}[b]{0.48\linewidth}
+		\includegraphics[width=\linewidth]{plots_p1/LF2_e09_xy.png}
+		%\caption{\label{fig:lightstd}.}
+	\end{minipage}
+	%\quad
+	\begin{minipage}[b]{0.48\linewidth}
+		\includegraphics[width=\linewidth]{plots_p1/RK4_e09_xy.png}
+	\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}[b]{0.48\linewidth}
+		\includegraphics[width=\linewidth]{plots_p1/LF2_e09_rv.png}
+		%\caption{\label{fig:lightstd}.}
+	\end{minipage}
+	%\quad
+	\begin{minipage}[b]{0.48\linewidth}
+		\includegraphics[width=\linewidth]{plots_p1/RK4_e09_rv.png}
+	\end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}[b]{0.48\linewidth}
+		\includegraphics[width=\linewidth]{plots_p1/LF2_e09_energy.png}
+		%\caption{\label{fig:lightstd}.}
+	\end{minipage}
+	%\quad
+	\begin{minipage}[b]{0.48\linewidth}
+		\includegraphics[width=\linewidth]{plots_p1/RK4_e09_energy.png}
+	\end{minipage}
+\end{figure}
+
+
+
+\subsubsection*{Comments}
+\begin{itemize}
+	\item  Leapfrog is better at conserving energy. For e = 0.9, the energy error in RK4 reaches 90\% after 100 periods. While in LF2, the fractional change in energy oscillates with a maximum error of 5\%.
+	
+	\item This is also clear from the phase diagram; LF2 repeats almost exactly the same cycle, while RK4 produces larger errors since the separation decreases continually as the system loses energy.
+	
+	\item LF2 leads to larger phase error than RK4. After 100 periods, the phase error is almost pi/2 for LF2 (at the given time step), while the phase remains almost the same for RK4.
+	
+	\item Therefore, leapfrog is more practical for N-body simulations with long simulation time, while Runge-Kutta is more accurate for small simulation time. 
+	
+\end{itemize}
 
 \section*{Problem 2}
 We perform a series of simulations of globular clusters.
@@ -61,13 +156,12 @@ a large softening parameter $ \epsilon = 0.005 $. We also do a control run with 
 The total number of particles in our simulation is 1000. We run this simulation with both 
 our PP-nbody code and BH-nbody code. The energy curve through 400 steps is shown in 
 Figure \ref{fig:energy}. When the softening parameter is too small, the energy of the 
-system increases dramatically due to close encounters being threw away with large step 
+system increases dramatically due to close encounters being thrown away with large step 
 sizes. 
 
-As for PP-nbody vs. BH-nbody, in our simulations of 1000 particles, BH code has nearly 
-no advantage. With a step size 0.0005 and softening parameter 0.005, when running for 
+As for PP-nbody vs. BH-nbody, in our simulations of 1000 particles, BH code has little advantage. With a step size 0.0005 and softening parameter 0.005, when running for 
 400 steps, i.e. 2 - 3 dynamic time, PP code conserves energy better then BH code, even 
-with a small critical angle, and the BH code is not effective faster.
+with a small critical angle, and the BH code is not significantly faster.
 It takes 21.0 seconds for the PP code to run the simulation, 15.0 seconds for the BH code 
 with theta = 0.6, and 31.8 seconds for the BH code with theta = 0.3.
 %PP-nbody, time elapsed: 21.007760047912598

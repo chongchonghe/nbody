@@ -5,9 +5,10 @@ import os
 data_files = sorted([name for name in os.listdir('./data/')])
 
 n_points = len(data_files)
-e = 0.9
+method = 'LF2' #choose method 'RK4' or 'LF2'; only changs the plots file name
+e = 0.5   #use eccentricity e = 0.5 or e = 0.9
 period = np.pi * np.sqrt(2 / (1 + e)**3)
-method = 'LF2'
+
 
 t = np.linspace(0, 100*period, n_points)
 x = np.zeros((n_points, 2))
