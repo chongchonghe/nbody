@@ -34,13 +34,13 @@ int main(int argc, char *argv[])
     // Usage: ./main fname outputdir N epsilon t_step n_steps op_freq [integrator]
 
     /*default parameters*/
-    char *file_name = "cluster03.txt";   //name of initial conditions file
+    char *file_name = "2body0.5.txt";   //name of initial conditions file
     char *outputdir = "./data/";  // dir of output files
-    int N = 1000;   //number of particles
-    double epsilon = 0.01;  //softening parameter
-    double t_step = 0.01;  //time step
-    int n_steps = 100;   // number of steps
-    int op_freq = 1;    // output frequency
+    int N = 2;   //number of particles
+    double epsilon = 0;  //softening parameter
+    double t_step = 0.05;  //time step
+    int n_steps = 4836;   // number of steps
+    int op_freq = 4;    // output frequency
     char *integrator = "LF2";  //ODE integration method
     int i,j,k; //loop variables
 
