@@ -167,18 +167,21 @@ the escape parameter $ \beta $.
 
 \subsection*{Results}
 To test our code, we artificially create a three-body system and show that a binary system 
-will appear when the step size is small enough. However, it will not be resolved with large 
-step 
-sizes.
+will appear when the step size is small enough. However, it will not be resolved when 
+running with large step sizes. When we implement our BH-nbody Binary code, it 
+successfully catches the binary when running with the same large step size. The movies 
+of the three run described above are shown \textit{simulations/binary/movie}. We were 
+working on this in a new branch. Due to limited amount of time we couldn't merge it to our 
+master branch. We just show the videos here.
 
-With $ d_{\rm sepa} \sim 5 $, we set $ \Delta t = 0.04 $, $ \alpha = 5 $ and $ \beta = 2 $, 
-which imply $ d_{\rm step} = 1 $, $ d_{\rm close} = 0.08 $, and $ d_{\rm max} = 0.16 $.
+%With $ d_{\rm sepa} \sim 5 $, we set $ \Delta t = 0.04 $, $ \alpha = 5 $ and $ \beta = 2 $, 
+%which imply $ d_{\rm step} = 1 $, $ d_{\rm close} = 0.08 $, and $ d_{\rm max} = 0.16 $.
 
-\begin{figure}
-	\centering
-	\caption{The tree code fails to resolve the binary system after a few orbits. Here $ 
-	\epsilon = 10^{-5}, \Delta t = 10^{-5}, 4000 steps per output. $}
-\end{figure}
+%\begin{figure}
+%	\centering
+%	\caption{The tree code fails to resolve the binary system after a few orbits. Here $ 
+%	\epsilon = 10^{-5}, \Delta t = 10^{-5}, 4000 steps per output. $}
+%\end{figure}
 
 %\subsection*{Morphology}
 %We use disk galaxies in our simulation. Each disk galaxy has two components: a 
