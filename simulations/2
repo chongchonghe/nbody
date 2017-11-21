@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Filename: cluster03.py
-Description: A script to generate initial conditions of a stellar cluster and 
-compare it with analytical Kroupa lines.
+Description: A script to generate initial conditions of a stellar cluster.
 Here I've defined functions to generate particle masses according to 
 Kroupa IMF, positions in a uniform sphere, and velocities in Gaussian
 distribution.
@@ -61,7 +60,7 @@ def imf(N):
 
 
 def imf_theory(m, N):
-    """ A function that describes Kroupa IMF in the form dN/dlog(m) in log scale """
+    """ A function that describes Kroupa IMF in the form dN/dlog(m) in log scale"""
 
     A = N / 3.9536
     m1 = 0.08
@@ -76,8 +75,9 @@ def imf_theory(m, N):
 
 
 def set_vel(data, alpha, radius):
-    """ Set the virialized velocities """
+    """ Set virialized velocities of a cluster """
     
+#    alpha = 0.4
     mTot = np.sum(data[:, 0])
     vel_sq = alpha * mTot / radius
     velx = np.sqrt(vel_sq / 3)
@@ -89,9 +89,7 @@ def set_vel(data, alpha, radius):
 
 
 def main(N):
-    """ The main function """
-    
-    # Generate the sample particles
+    # plot a histogram of the samples
     mass = imf(N)
     data = np.zeros([N, 7])
     data[:, 0] = mass
@@ -100,7 +98,6 @@ def main(N):
     #np.savetxt("cluster03.txt", data)
     np.savetxt("cluster03_2000.txt", data)
     
-    # plot a histogram of the samples
     bins = np.logspace(np.log10(0.08), 2, 36)
     dlogm = np.log10(bins[1]) - np.log10(bins[0])
     plt.hist(mass, bins=bins, label="sample", weights=np.ones(len(mass))/dlogm)
@@ -119,6 +116,6 @@ def main(N):
     plt.tight_layout()
     plt.savefig('imf.eps')
 
-
 if __name__ == "__main__":
-    main(2000)
+    N = 2000
+    main(N)

@@ -1,4 +1,5 @@
 \input{header.tex}
+\usepackage{graphicx}
 
 \begin{document}
 
@@ -7,24 +8,14 @@
 \date{\today}
 \maketitle
 
-\section*{Problem 2: Simulations of Globular Clusters}
+\section*{Problem 2}
 We perform a series of simulations of globular clusters.
-\subsection*{Setups}
 
-\subsubsection*{Units and Time Scales}
-The units are: $ [T] = 2.5395 \times 10^{15}\,$s $\approx 80\,$Myr, 
-$ [L] = 3.08 \times 10^{18} \, $cm $ \approx 1 \, $pc, $ [M] = 6.7925 \times 10^{31} \, $g $ 
-\approx 0.03416 M_\odot $. In this setup the gravitational constant is unity. 
-
-Suppose a cluster of stars from the results of \textit{RAMSES} simulation which has $ \sim 
-$ 1000 stars with Salpeter IMF in a box of length $ L = 50 $. If this stellar system is 
-virialized, $ \sigma^2 = M_{\rm tot} / R $, from which we obtain $ \sigma \approx 
-27 $. Here I use a mean mass of 0.638 $ M_\odot $ = 20 (code unit) from Salpeter IMF and 
-$ R = 25 $. 
-Then, the crossing time of dispersion velocity is $ t_{\sigma} = L / \sigma \approx 2 $.
-If we choose a step size $ \Delta t  = t_\sigma / 50 = 0.04 $, i.e. 50 steps in a course time, 
-then with 5000 steps we are able to simulate 100 course time, which is equal to 16 Gyr. 
-This can be done with a PP n-body code on my laptop.
+\subsection*{Stellar Cluster}
+%\subsubsection*{Setups}
+We did a few simulations with made-up initial conditions as well as initial conditions taken 
+from a snapshot of a simulation from \textit{RAMSES-RT}, an AMR MHD code with 
+radiative transfer.
 
 \subsubsection*{Mass distribution}
 We implement in all of our simulations the Kroupa IMF:
@@ -44,7 +35,15 @@ m=
 	\cfrac{0.166558}{(1.00024\, -x)^{10/13}} & (0.760707<x<1)
 	\end{cases}
 \end{equation}
-where $ x $ is uniform random numbers between 0 and 1.
+where $ x $ is uniform random numbers between 0 and 1. Figure \ref{fig:imf} shows the 
+histogram of the masses of the generated particles as compared to the analytical line.
+\begin{figure}
+	\centering
+	\includegraphics[width=.6\columnwidth]{../simulations/imf.pdf}
+	\caption{The mass distribution of the particles in our simulation compared to analytical 
+	Kroupa IMF lines.}
+	\label{fig:imf}
+\end{figure}
 
 \subsubsection*{Spacial and velocity distribution}
 The cluster is a specially uniformly distributed sphere with a radius of 1. The initial 
@@ -53,18 +52,35 @@ of $ \alpha \sim 0.4 $. A virial ratio $ \alpha < 0.5 $ implies the system is bo
 velocity dispersion crossing time is $ t \approx 0.08 $, so we use a step size of 0.001, i.e. 
 80 steps per crossing time.
 
-\subsection*{Results}
+\subsubsection*{Results}
 %../pp-nbody/a.out cluster03.txt cluster03 1000 0.01 0.001 200 1
 The video of this specific setup is \textit{simulations/cluster03.mp4}.
-\subsubsection{Energy conservation and step sizes}
 
+\subsubsection*{Energy conservation and step sizes}
 
+\subsubsection*{Units and Time Scales}
+The units in our simulation are as follow: $ [T] = 2.5395 \times 10^{15}\,$s $\approx 
+80\,$Myr, 
+$ [L] = 3.08 \times 10^{18} \, $cm $ \approx 1 \, $pc, $ [M] = 6.7925 \times 10^{31} \, $g $ 
+\approx 0.03416 M_\odot $. In this setup the gravitational constant is unity. 
+
+Imaging a cluster of stars from the outputs of \textit{RAMSES} simulation which has $ \sim 
+$ 1000 stars with Kroupa IMF located in a box of length $ L = 50 $. If this system is 
+virialized, then $ \sigma^2 = M_{\rm tot} / R $, from which we obtain $ \sigma \approx 
+27 $. Here I use a mean mass of 0.638 $ M_\odot $ = 20 (code unit) from Salpeter IMF and 
+$ R = 25 $.
+Then, the crossing time of dispersion velocity is $ t_{\sigma} = L / \sigma \approx 2 $.
+If we choose a step size $ \Delta t  = t_\sigma / 50 = 0.04 $, i.e. 50 steps in a crossing time, 
+then with 5000 steps we are able to simulate 100 crossing time, which is equal to 16 Gyr. 
+This can be done with a PP n-body code on my laptop, and it will be even faster with our 
+BH-tree n-body code.
 
 \subsection*{Binary Problem}
-I am trying to conquer the problem of close encounters in our simulation.
-The basic idea is to check if two stars 1) are close enough to each other and 2) $ K + V < 0 
-$, every $ n $ steps. If yes, we just replace these two stars with one star at the center 
-of mass. Binaries may further merge into trinaries, and so on so forth.
+I have a try on the problem of binarity in our simulation.
+The basic idea is to check if two particles 1) are close enough to each other, and 2) $ K + V 
+< 0 $, every $ n $ steps. If yes, we just replace these two particles with one star 
+representing the motion of the center of mass. Binaries may further merge into trinaries 
+and so on.
 
 
 \subsubsection*{Realization of the Binary Problem}
@@ -109,7 +125,7 @@ the escape parameter $ \beta $.
 With $ d_{\rm sepa} \sim 5 $, we set $ \Delta t = 0.04 $, $ \alpha = 5 $ and $ \beta = 2 $, 
 which imply $ d_{\rm step} = 1 $, $ d_{\rm close} = 0.08 $, and $ d_{\rm max} = 0.16 $.
 
-\subsection{Results}
+\subsection*{Results}
 We artificially create a binary system and show that the binary is resolved with small step 
 sizes but not resolved with large step sizes.
 
