@@ -10,16 +10,16 @@ ASTR615 HW #4: Simulation and Visualization of N-body Problem using particle-par
 
 ##############################################################
 
-### Problem 1
+# Problem 1
 
 The directory pp-nbody contains the particle-particle code
 The directory BH-nbody contains the Barnes-Hut code
 
-# To Compile
+### To Compile
 cd to either directories and 
     gcc -o main main.c
 
-# To Run
+### To Run
 ./main fname outputdir N epsilon t_step n_steps op_freq [integrator]
 
 For example, for 2 bodies with e = 0.5 (default parameters)
@@ -28,7 +28,7 @@ For example, for 2 bodies with e = 0.5 (default parameters)
 for 2 bodies with e = 0.9
 ./main 2body0.9.txt ./data 2 0 0.003 56547 50 RK4 
 
-# To produce plots
+### To produce plots
 
 Data files will be saved in the outputdir (./data)
 
@@ -38,20 +38,27 @@ Change lines 8 and 9 in the file according to the used method and eccentricity
 
 Plots will be saved to the directory ./plots_p1
 
-# Files Description (in directory BH-nbody)
+### Files Description (in directory BH-nbody)
 
-main.c   takes input from the user and runs the simulation 
+main.c   takes input from the user and runs the simulation
+ 
 definitions.h contains structure and constant definitions
+
 read_data.h   reads data from initial conditions file
+
 bhtree.h      builds Barnes-Hut tree
+
 force.h       performs tree walk and calculates force on each particle
+
 integ_LF2.h   updates position and velocity using 2nd order leapfrog
+
 integ Rk4.h   updates position and velocity using 4th order Runge-Kutta
+
 save_data.h   saves data to output directory 
 
 ###############################################################
 
-### Problem 2
+# Problem 2
 
 Files are in the folders *simulation* and *visual*. 
 
