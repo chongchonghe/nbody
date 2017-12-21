@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:/Users/chongchonghe/Desktop/nbody/pp-nbody-cpp/nbody-cpp/nbody-cpp/def.h">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/chongchonghe/Desktop/nbody/pp-nbody-cpp/nbody-cpp/nbody-cpp/definitions.h">
+   </FileRef>
+   <FileRef
+      location = "self:">
+   </FileRef>
+</Workspace>

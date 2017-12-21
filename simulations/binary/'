@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# pp-nbody run of small step size
+#../../pp-nbody/a.out test.txt test4 3 0.0000001 0.0001 80000 800
+
+# pp-nbody run of large step size
+#../../pp-nbody/a.out test.txt test_large_step_size 3 0.0000001 0.01 800 8
+
+# pythag01
+../../pp-nbody/main pythag01.txt pythag01 3 0.000001 .00001 20000 200
+python movie2d.py pythag01 15
+python ../makemovie.py pythag01_fig

@@ -7,13 +7,65 @@
 
 from __future__ import division, print_function
 import numpy as np
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+# import matplotlib
+# matplotlib.use('Agg')
 import glob
 import time
 import sys
 import os
+import matplotlib.pyplot as plt
+# import matplotlib.animation as animation
+from matplotlib import animation
+
+plt.style.use('dark_background')
+fig = plt.figure()
+
+ax = plt.axes(xlim=(-3.4, 3.4), ylim=(-1.8, 3.2))
+ax.axis('off')
+
+N = 3
+lines = [plt.plot([], [], '.')[0] for _ in range(N)]
+
+def init():    
+    for line in lines:
+        line.set_data([], [])
+    return lines
+
+startid = 0
+files = sorted(glob.glob(sys.argv[1] + "/*"))[startid:]
+
+def animate(i):
+    fn = files[i]
+    data = np.loadtxt(fn)
+    N = len(data)
+    x = data[:, 1]
+    y = data[:, 2]
+    try:
+        binarity = data[:, 7]
+    except IndexError:
+        binarity = None;
+
+    for j, line in enumerate(lines):
+        isPlot = False
+        if binarity is None:
+            cid = 0
+            isPlot = True
+        elif binarity[j] >= 1:
+            cid = int(binarity[j])
+            isPlot = True
+        if isPlot:
+            line.set_data(x[j], y[j]) # , "C{:d}.".format(cid))
+
+    return lines
+
+anim = animation.FuncAnimation(fig, animate, init_func=init,
+                               frames=len(files), interval=50, blit=True)
+
+plt.show()
+
+
+sys.exit()
+
 
 if len(sys.argv) <= 2:
     raise SystemExit("usage: ./movie2d.py datadir boxsize [num of fig]")
@@ -24,7 +76,7 @@ if len(sys.argv) == 4:
 else:
     numOfFig = 2
 
-#plt.style.use('dark_background')
+plt.style.use('dark_background')
 
 if numOfFig == 1:
     fig, ax = plt.subplots(1, figsize=[6, 6])

@@ -67,7 +67,7 @@ def imf_theory(m, N):
     m1 = 0.08
     m2 = 0.5
     m3 = 100
-    if (m1-1e-8<=m)&(m<m2):
+    
         return A * 2.30259 * m**(-0.3)
     elif (m2<=m)&(m<=m3+1e-8):
         return A * 1.15129 * m**(-1.3)
